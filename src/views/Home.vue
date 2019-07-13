@@ -1,18 +1,27 @@
 <template>
   <app-frame>
-    <b-row>
-      <article-item/>
-    </b-row>
+      <article-group/>
   </app-frame>
 </template>
 
 <script>
   import AppFrame from '../components/AppFrame'
   import ArticleItem from '../components/ArticleItem'
+  import ArticleGroup from '../components/ArticleGroup'
   export default {
     components: {
       AppFrame,
-      ArticleItem
+      ArticleGroup
+    },
+    data() {
+      return {
+        
+      }
+    },
+    computed: {
+      topics() {
+        return this.$store.state.topics
+      }
     }
   }
 </script>
