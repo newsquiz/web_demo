@@ -39,6 +39,11 @@ export default new Vuex.Store({
         name: 'Sports',
         value: 'sports'
       },
+      {
+        name: 'Recommended',
+        groupTitle: 'Suggested articles for you',
+        value: 'recommended'
+      }
     ]
   },
   mutations: {
