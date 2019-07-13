@@ -35,7 +35,11 @@ export default {
   data() {
     return {
       showResult: false,
-      finished: false
+    }
+  },
+  computed: {
+    finished() {
+      return this.$store.state.finished
     }
   },
   props: {
@@ -46,6 +50,7 @@ export default {
   methods: {
     submitAnswers() {
       this.showResult = true
+      this.$store.commit('setFinished', true)
     },
     abort() {
 
