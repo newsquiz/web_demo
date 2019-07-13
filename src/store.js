@@ -13,7 +13,7 @@ export default new Vuex.Store({
       checked: false,
       articles: [
         {
-          _id: '1',
+          id: '1',
           topic: '',
           created_time: '13/07/2019',
           thumbnail: 'https://znews-photo.zadn.vn/w480/Uploaded/jaegtn/2019_07_13/Business_ZuckerbergCapitol944719958_1.jpg',
