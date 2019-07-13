@@ -1,13 +1,15 @@
 <template>
-  <HelloWorld />
+  <app-frame>
+    
+  </app-frame>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+  import AppFrame from '../components/AppFrame'
 
   export default {
     components: {
-      HelloWorld
+      AppFrame
     }
   }
 </script>
