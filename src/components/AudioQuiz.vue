@@ -2,7 +2,7 @@
   <div>
     <v-container grid-list-lg>
       <v-layout row wrap>
-        <v-flex xs12 md6>
+        <v-flex xs12 md6 :offset-md3="!finished">
           <questions-pane :questions="article.questions"
             :article_id="article.id" :height="'70vh'"></questions-pane>
         </v-flex>

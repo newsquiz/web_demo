@@ -3,22 +3,32 @@
     <app-frame>
       <v-layout row v-if="article" style="padding: 10px">
         <v-flex xs12 md10 offset-md1>
-          <p class="title-text">
-            <span>{{ article.title }}</span>
-            <v-chip small dark label color="accent" outline>
-              {{ displayType }}
-            </v-chip>
-            <v-chip small dark label :color="levelColor">{{ displayLevel }}</v-chip>
-          </p>
-          <p class='subtitle-text'>
-            Published by <a :href="article.source_url">{{ article.publisher }}</a> on <span>{{ displayDate }}</span>
-          </p>
+          <div class="text-xs-center">
+            <p class="title-text">
+              <span>{{ article.title }}</span>
+            </p>
+            <p class='subtitle-text'>
+              Published by <a :href="article.source_url">{{ article.publisher }}</a> on <span>{{ displayDate }}</span>
+            </p>
+            <p>
+              <v-chip small dark label color="accent" outline>
+                {{ displayType }}
+              </v-chip>
+              <v-chip small dark label :color="levelColor">{{ displayLevel }}</v-chip>
+            </p>
+          </div>
+          
           <text-quiz v-if="article.type == 'text'"
             :article="article"></text-quiz>
           <audio-quiz v-else-if="article.type == 'audio'"
             :article="article"></audio-quiz>
         </v-flex>
       </v-layout>
+
+      <div class="text-xs-center" style="margin-top: 20%">
+        <v-progress-circular indeterminate
+          v-if="loading" size="128" width="10"></v-progress-circular>
+      </div>
     </app-frame>
 
     <v-footer app color="accent" dark height="64"
@@ -54,6 +64,7 @@ export default {
       const component = this
       const id = this.$route.params.quiz_id
       var url = `${process.env.VUE_APP_API_URL}/api/articles/${id}`
+      this.loading = true
       return axios.get(url, {
         headers: {
           'User-Id': '1'
@@ -62,6 +73,7 @@ export default {
         const data = response.data.data
         component.article = data
         document.title = component.article.title
+        component.loading = false
       }).catch(error => {
         alert(error.message)
       })
@@ -100,7 +112,8 @@ export default {
   },
   data() {
     return {
-      article: null
+      article: null,
+      loading: false
     }
   }
 }
