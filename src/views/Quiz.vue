@@ -1,10 +1,10 @@
 <template>
   <app-frame>
-    <v-layout row v-if="article">
+    <v-layout row v-if="article" style="padding: 10px">
       <v-flex xs12 md10 offset-md1>
         <p class="title-text">{{ article.title }}</p>
         <p class='subtitle-text'>
-          Published by <a :href="article.sourceUrl">{{ article.publisher }}</a> on <span>{{ article.created_time }}</span>
+          Published by <a :href="article.source_url">{{ article.publisher }}</a> on <span>{{ article.created_time }}</span>
         </p>
         <p class="subtitle-text"><b>
           {{ `Level: ${displayLevel}` }}  
@@ -41,7 +41,7 @@ export default {
       thumbnail: 'https://znews-photo.zadn.vn/w480/Uploaded/jaegtn/2019_07_13/Business_ZuckerbergCapitol944719958_1.jpg',
       type: 'text',
       publisher: 'Forbes',
-      sourceUrl: '#',
+      source_url: '#',
       title: 'Mauris egestas ante nisl',
       level: 'easy',
       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nunc urna, sodales nec mauris sit amet, auctor rutrum turpis. Duis vulputate elit a hendrerit faucibus. Pellentesque metus tellus, rutrum et lorem non, vehicula volutpat sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc posuere at ante eget interdum. Suspendisse sagittis id odio consectetur suscipit. In sed rutrum magna. Cras consequat rhoncus eleifend. Aliquam hendrerit sodales dolor, vel vestibulum arcu faucibus vel. Suspendisse lacinia elit id lectus lobortis fermentum sit amet ut turpis. Aenean posuere iaculis ex, sit amet fringilla est pretium ac. Aliquam interdum purus eget enim luctus, ac interdum tellus gravida. Praesent laoreet purus justo, sit amet venenatis nulla feugiat vel.',
