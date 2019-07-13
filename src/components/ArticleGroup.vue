@@ -6,7 +6,7 @@
     <!-- <hr> -->
     <v-layout row wrap>
         <v-flex v-for="article in articles" 
-          :key="article.id" xs12 sm6 md3>
+          :key="article.id" xs12 sm4 md3>
             <article-item :article="article"/>
         </v-flex>
     </v-layout>
@@ -16,26 +16,14 @@
 
 <script>
   import ArticleItem from '../components/ArticleItem'
+  import axios from 'axios'
+
   export default {
     components: {
         ArticleItem
     },
     data: () => ({
         articles: [
-            {
-                id: 1,
-                thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
-                title: 'Number 10',
-                date: '25-07-2019',
-                level: 'beginner'
-            },
-            {
-                id: 2,
-                thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
-                title: 'Number 1012',
-                date: '25-07-2019',
-                level: 'beginner'
-            },
         ]
     }),
     props: {
@@ -44,6 +32,18 @@
           name: 'Politics',
           value: 'politics'
         }
+      }
+    },
+    mounted() {
+      this.fetchArticles();
+    },
+    methods: {
+      fetchArticles: function() {
+        const component = this
+        axios.get(process.env.VUE_APP_API_URL + this.topic.value + '/articles').then(response => {
+          console.log(response)
+          component.articles = response.data.data
+        })
       }
     }
   }
