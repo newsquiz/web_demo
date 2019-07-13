@@ -18,6 +18,7 @@
         ArticleItem
     },
     data: () => ({
+        id: 1,
         title: 'The thao',
         articles: [
             {
@@ -35,6 +36,30 @@
                 level: 'beginner'
             },
         ]
-    })
+    }),
+    props: {
+        articleGroup:{
+            default: {
+                id: 1,
+                title: 'The thao',
+                articles: [
+                    {
+                        id: 1,
+                        thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
+                        title: 'Number 10',
+                        date: '25-07-2019',
+                        level: 'beginner'
+                    },
+                    {
+                        id: 2,
+                        thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
+                        title: 'Number 1012',
+                        date: '25-07-2019',
+                        level: 'beginner'
+                    },
+                ]
+            }
+        }
+    }
   }
 </script>
