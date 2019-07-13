@@ -2,7 +2,7 @@
   <div>
     <v-toolbar app color="primary" flat dark>
       <v-toolbar-title id="app-text">
-				{{ title }}
+				<a href="/">{{ title }}</a>
 			</v-toolbar-title>
       
       <v-spacer></v-spacer>
@@ -48,6 +48,11 @@ export default {
 </script>
 
 <style>
+#app-text a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .app-wrapper {
   /* padding: 10px; */
 }

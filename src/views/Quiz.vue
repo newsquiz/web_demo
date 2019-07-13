@@ -46,6 +46,12 @@ export default {
   mounted() {
     this.$store.commit('setFinished', false)
   },
+  methods: {
+    fetchArticle() {
+      const id = this.$router.params.quiz_id
+      var url = `${process.env.VUE_APP_API_URL}articles/`
+    }
+  },
   computed: {
     displayLevel() {
       return capitalize(this.article.level)
