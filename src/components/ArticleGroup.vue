@@ -6,7 +6,7 @@
     <!-- <hr> -->
     <v-layout row wrap>
         <v-flex v-for="article in articles" 
-          :key="article.id" xs12 sm6 md3>
+          :key="article.id" xs12 sm4 md3>
             <article-item :article="article"/>
         </v-flex>
     </v-layout>
@@ -27,14 +27,36 @@
                 thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
                 title: 'Number 10',
                 date: '25-07-2019',
-                level: 'beginner'
+                level: 'easy',
+                publisher: 'WSJ',
+                source_url: 'https://www.bbc.co.uk/'
             },
             {
                 id: 2,
                 thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
                 title: 'Number 1012',
                 date: '25-07-2019',
-                level: 'beginner'
+                level: 'medium',
+                publisher: 'BBC news',
+                source_url: 'https://www.bbc.co.uk/'
+            },
+            {
+                id: 3,
+                thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
+                title: 'Number 1012',
+                date: '25-07-2019',
+                level: 'hard',
+                publisher: 'BBC news',
+                source_url: 'https://www.bbc.co.uk/'
+            },
+            {
+                id: 4,
+                thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
+                title: 'Number 1012',
+                date: '25-07-2019',
+                level: 'hard',
+                publisher: 'BBC news',
+                source_url: 'https://www.bbc.co.uk/'
             },
         ]
     }),
