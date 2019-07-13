@@ -49,7 +49,7 @@ export default {
 
 <style>
 .app-wrapper {
-  padding: 10px;
+  /* padding: 10px; */
 }
 </style>
 
