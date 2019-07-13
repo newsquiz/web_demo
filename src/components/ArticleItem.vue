@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-flex xs12 sm3 offset-sm3>
+    <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-img
           class="white--text"
@@ -18,9 +18,11 @@
         <v-card-title>
           <div>
             <span class="black--text">
-              <h2>Number 10</h2>
-            </span><br>
-            <span class="gray--text">Whitsunday Island, Whitsunday Islands</span>
+              <h2>{{article}}</h2>
+            </span>
+            <br>
+            <span class="gray--text">{{date}}</span><br>
+            <span class="green--text">{{level}}</span>
           </div>
         </v-card-title>
         <!-- <v-card-actions>
@@ -36,7 +38,10 @@
 <script>
   export default {
     data: () => ({
-      thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg'
+      thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
+      article: 'Number 10',
+      date: '25-07-2019',
+      level: 'beginner'
     })
   }
 </script>
