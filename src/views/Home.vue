@@ -1,6 +1,6 @@
 <template>
   <app-frame>
-    
+
   </app-frame>
 </template>
 
@@ -10,6 +10,16 @@
   export default {
     components: {
       AppFrame
+    },
+    data() {
+      return {
+        
+      }
+    },
+    computed: {
+      topics() {
+        return this.$store.state.topics
+      }
     }
   }
 </script>

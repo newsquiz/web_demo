@@ -20,13 +20,7 @@
     </v-toolbar>
 
     <v-content>
-      <v-container>
-        <v-layout row>
-          <v-flex xs12 offset-md1 md10 offset-lg2 lg8>
-            <slot></slot>
-          </v-flex>
-        </v-layout>
-      </v-container>
+      <slot></slot>
     </v-content>
   </div>
 </template>
