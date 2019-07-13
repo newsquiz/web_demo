@@ -16,10 +16,12 @@
 
 <script>
   import AppFrame from '../components/AppFrame'
-
+  import ArticleItem from '../components/ArticleItem'
+  import ArticleGroup from '../components/ArticleGroup'
   export default {
     components: {
-      AppFrame
+      AppFrame,
+      ArticleGroup
     },
     data() {
       return {
