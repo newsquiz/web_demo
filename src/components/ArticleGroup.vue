@@ -1,9 +1,12 @@
 <template>
   <v-container grid-list-lg>
-    {{title}}
-    <hr>
-    <v-layout>
-        <v-flex v-for="article in articles" :key="article.id" sm3>
+    <h1>
+      {{ `${topic.name}` }}
+    </h1>
+    <!-- <hr> -->
+    <v-layout row wrap>
+        <v-flex v-for="article in articles" 
+          :key="article.id" xs12 sm6 md3>
             <article-item :article="article"/>
         </v-flex>
     </v-layout>
@@ -18,7 +21,6 @@
         ArticleItem
     },
     data: () => ({
-        title: 'The thao',
         articles: [
             {
                 id: 1,
@@ -35,6 +37,14 @@
                 level: 'beginner'
             },
         ]
-    })
+    }),
+    props: {
+      topic: {
+        default: {
+          name: 'Politics',
+          value: 'politics'
+        }
+      }
+    }
   }
 </script>

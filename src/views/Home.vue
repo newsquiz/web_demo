@@ -8,7 +8,7 @@
       </v-tab>
 
       <v-tab-item v-for="topic in topics" :key="topic.value">
-        
+        <article-group :topic="topic"></article-group>
       </v-tab-item>
     </v-tabs>
   </app-frame>
