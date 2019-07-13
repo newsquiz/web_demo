@@ -3,7 +3,8 @@
     <v-tabs v-model="activeTab"
       color="secondary" dark slider-color="accent"
       mandatory>
-      <v-tab v-for="topic in topics" :key="topic.value" ripple>
+      <v-tab v-for="topic in topics" 
+        :key="topic.value" ripple>
         {{ topic.name }}
       </v-tab>
 

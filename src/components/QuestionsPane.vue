@@ -13,7 +13,7 @@
       <v-btn color="error" round
         @click="abort"
         v-if="!finished">
-        Abort and go back
+        Abort to home
       </v-btn>
       <v-btn color="success" round
         @click="submitAnswers"
@@ -53,7 +53,7 @@ export default {
       this.$store.commit('setFinished', true)
     },
     abort() {
-
+      this.$route.push('/')
     }
   }
 }

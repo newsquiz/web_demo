@@ -1,12 +1,13 @@
 <template>
   <v-container grid-list-lg>
-    <h1>
-      {{ `${topic.name}` }}
-    </h1>
-    <!-- <hr> -->
+    <div>
+      <h1>
+        {{ `${topic.groupTitle || topic.name}` }}
+      </h1>
+    </div>
     <v-layout row wrap>
         <v-flex v-for="article in articles" 
-          :key="article.id" xs12 sm4 md3>
+          :key="article.id" xs12 sm6 md4 xl3>
             <article-item :article="article"/>
         </v-flex>
     </v-layout>
@@ -40,8 +41,7 @@
     methods: {
       fetchArticles: function() {
         const component = this
-        axios.get(process.env.VUE_APP_API_URL + this.topic.value + '/articles').then(response => {
-          console.log(response)
+        axios.get(process.env.VUE_APP_API_URL + '/api/' + this.topic.value + '/articles').then(response => {
           component.articles = response.data.data
         })
       }

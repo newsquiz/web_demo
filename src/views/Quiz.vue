@@ -11,7 +11,7 @@
             <v-chip small dark label :color="levelColor">{{ displayLevel }}</v-chip>
           </p>
           <p class='subtitle-text'>
-            Published by <a :href="article.source_url">{{ article.publisher }}</a> on <span>{{ article.created_time }}</span>
+            Published by <a :href="article.source_url">{{ article.publisher }}</a> on <span>{{ displayDate }}</span>
           </p>
           <text-quiz v-if="article.type == 'text'"
             :article="article"></text-quiz>
@@ -22,9 +22,9 @@
     </app-frame>
 
     <v-footer app color="secondary" dark height="64"
-      v-if="article.type == 'audio'" style="padding: 0">
+      v-if="article && article.type == 'audio'" style="padding: 0">
       <audio-player color="white"
-        :file="article.audio"></audio-player>
+        :file="audioUrl"></audio-player>
     </v-footer>
   </div>
 </template>
@@ -34,6 +34,8 @@ import AppFrame from '@/components/AppFrame'
 import TextQuiz from '@/components/TextQuiz'
 import AudioQuiz from '@/components/AudioQuiz'
 import AudioPlayer from '@/components/AudioPlayer'
+
+import axios from 'axios'
 
 function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.slice(1)
@@ -45,14 +47,31 @@ export default {
   },
   mounted() {
     this.$store.commit('setFinished', false)
+    this.fetchArticle()
   },
   methods: {
     fetchArticle() {
-      const id = this.$router.params.quiz_id
-      var url = `${process.env.VUE_APP_API_URL}articles/`
+      const component = this
+      const id = this.$route.params.quiz_id
+      var url = `${process.env.VUE_APP_API_URL}/api/articles/${id}`
+      console.log(url)
+      return axios.get(url, {
+        headers: {
+          'User-Id': '1'
+        }
+      }).then(response => {
+        const data = response.data.data
+        component.article = data
+        document.title = component.article.title
+      }).catch(error => {
+        alert(error.message)
+      })
     }
   },
   computed: {
+    audioUrl() {
+      return `${process.env.VUE_APP_API_URL}${this.article.audio}`
+    },
     displayLevel() {
       return capitalize(this.article.level)
     },
@@ -70,42 +89,16 @@ export default {
         default:
           return ''
       }
-    }
+    },
+    displayDate: function() {
+      let current_datetime = new Date(Date.parse(this.article.created_time));
+      let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
+      return formatted_date
+    },
   },
   data() {
-    var article = {
-      id: '1',
-      topic: 'politics',
-      created_time: '13/07/2019',
-      thumbnail: 'https://znews-photo.zadn.vn/w480/Uploaded/jaegtn/2019_07_13/Business_ZuckerbergCapitol944719958_1.jpg',
-      type: 'audio',
-      publisher: 'Forbes',
-      source_url: '#',
-      title: 'Mauris egestas ante nisl',
-      level: 'easy',
-      audio: 'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nunc urna, sodales nec mauris sit amet, auctor rutrum turpis. Duis vulputate elit a hendrerit faucibus. Pellentesque metus tellus, rutrum et lorem non, vehicula volutpat sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc posuere at ante eget interdum. Suspendisse sagittis id odio consectetur suscipit. In sed rutrum magna. Cras consequat rhoncus eleifend. Aliquam hendrerit sodales dolor, vel vestibulum arcu faucibus vel. Suspendisse lacinia elit id lectus lobortis fermentum sit amet ut turpis. Aenean posuere iaculis ex, sit amet fringilla est pretium ac. Aliquam interdum purus eget enim luctus, ac interdum tellus gravida. Praesent laoreet purus justo, sit amet venenatis nulla feugiat vel.',
-      questions: [
-        {
-          id: '1', article_id: '1',
-          content: 'Quisque in nibh et lorem malesuada ullamcorper?',
-          type: 'fill',
-          answer: 'Quisque'
-        },
-        {
-          id: '2', article_id: '1',
-          content: 'Proin ornare, erat non vulputate egestas, nibh enim tempus neque?',
-          type: 'choice',
-          answer: 'Proin',
-          options: [
-            'Proin', 'ornare', 'erat', 'vulputate'
-          ]
-        }
-      ]
-    }
-
     return {
-      article: article
+      article: null
     }
   }
 }

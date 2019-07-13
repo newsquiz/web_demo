@@ -2,6 +2,11 @@
   <div>
     <v-container grid-list-lg>
       <v-layout row wrap>
+        <v-flex xs12 md6>
+          <questions-pane :questions="article.questions"
+            :article_id="article.id" :height="'70vh'"></questions-pane>
+        </v-flex>
+        
         <v-flex xs12 md6 v-show="finished">
           <v-card
             height="70vh" style="overflow-y: auto">
@@ -15,11 +20,6 @@
               <div v-html="article.content" class="article-text"></div>
             </v-card-text>
           </v-card>
-        </v-flex>
-
-        <v-flex xs12 :md6="finished">
-          <questions-pane :questions="article.questions"
-            :article_id="article.id" :height="'70vh'"></questions-pane>
         </v-flex>
       </v-layout>
     </v-container>

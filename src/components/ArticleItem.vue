@@ -1,32 +1,39 @@
 <template>
-  <v-card>    
-    <a :href="'/quiz/' + article.id"><v-img
+  <v-card hover :href="'/quiz/' + article.id">    
+    <v-img
       class="white--text"
       height="200px"
-      :src="article.thumbnail"></v-img>
-    </a>
+      :src="thumbnailUrl"></v-img>
     <v-card-title>
       <div>
-        <span class="black--text">
-          <h2>{{article.title}}</h2>
+        <h2 class="headline">{{article.title}}</h2>
+        <span class="subtitle-text">
+          Published on <span>{{displayDate}}</span> by 
+          <a :href="article.source_url" target="_blank">
+            <b>{{article.publisher}}</b>
+          </a>
         </span>
-        <br>
-        <v-layout row wrap>
-          <v-flex align-start>
-            <span class="gray--text"><b>{{date}}</b></span> <br>
-            <span class="gray--text"><a :href="article.source_url" target="_blank"><b>{{article.publisher}}</b></a></span>
-          </v-flex>
-          <v-flex align-end>
-            <span :class="level_color"><b class="capicalize">{{article.level}}</b></span>
-          </v-flex>
-        </v-layout>
       </div>
     </v-card-title>
+
+    <v-card-actions style="margin-top: -5px">
+      <v-spacer></v-spacer>
+      <v-chip small label outline color="accent">
+        {{ displayType }}
+      </v-chip>
+      <v-chip small label dark :color="levelColor">
+        {{ displayLevel }}
+      </v-chip>
+    </v-card-actions>
   </v-card>
 </template>
 
 
 <script>
+  function capitalize(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+
   export default {
     data: () => ({
     }),
@@ -44,14 +51,32 @@
       }
     },
     computed: {
-      level_color: function(){
-        return this.article.level == 'easy' ? 'green--text' : (this.article.level == 'medium' ? 'yellow--text' : 'red--text')
+      levelColor() {
+        switch (this.article.level) {
+          case 'easy':
+            return 'green'
+          case 'medium':
+            return 'yellow'
+          case 'hard':
+            return 'red'
+          default:
+            return ''
+        }
       },
-      date: function() {
+      displayDate: function() {
         let current_datetime = new Date(Date.parse(this.article.created_time));
         let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
         return formatted_date
-      }
+      },
+      displayLevel() {
+        return capitalize(this.article.level)
+      },
+      thumbnailUrl() {
+        return `${process.env.VUE_APP_API_URL}${this.article.thumbnail}`
+      },
+      displayType() {
+        return capitalize(this.article.type)
+      },
     }
   }
 </script>
@@ -59,5 +84,9 @@
 <style>
 .capitalize:first-letter { 
   text-transform: uppercase; 
+}
+
+.subtitle-text {
+  font-style: italic;
 }
 </style>
