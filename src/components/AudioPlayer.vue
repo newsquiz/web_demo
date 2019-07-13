@@ -5,7 +5,7 @@
     <v-card-text>
       <v-layout row wrap>
         <v-flex xs12 style="margin-top: -30px">
-          <v-progress-linear color="accent"
+          <v-progress-linear color="secondary"
             @change="setPosition"
             v-model="percentage"
             :disabled="!loaded"

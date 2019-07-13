@@ -21,7 +21,7 @@
       </v-layout>
     </app-frame>
 
-    <v-footer app color="secondary" dark height="64"
+    <v-footer app color="accent" dark height="64"
       v-if="article && article.type == 'audio'" style="padding: 0">
       <audio-player color="white"
         :file="audioUrl"></audio-player>
@@ -69,6 +69,9 @@ export default {
   },
   computed: {
     audioUrl() {
+      if (this.article.audio.startsWith('http')) {
+        return this.article.audio
+      }
       return `${process.env.VUE_APP_API_URL}${this.article.audio}`
     },
     displayLevel() {
