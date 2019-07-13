@@ -72,6 +72,9 @@
         return capitalize(this.article.level)
       },
       thumbnailUrl() {
+        if (this.article.thumbnail.startsWith('http')) {
+          return this.article.thumbnail
+        }
         return `${process.env.VUE_APP_API_URL}${this.article.thumbnail}`
       },
       displayType() {
