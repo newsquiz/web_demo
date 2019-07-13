@@ -7,20 +7,22 @@
       
       <v-spacer></v-spacer>
 
-        <div>
-          <span class="hidden-sm-and-down">
-            {{ `Welcome, ${user.name}` }}
-          </span>
-          <v-btn icon>
-            <v-avatar size="40px">
-              <img :src="user.imageUrl" alt="profile">
-            </v-avatar>
-          </v-btn>
-        </div>
+      <div>
+        <span class="hidden-sm-and-down">
+          {{ `Welcome, ${user.name}` }}
+        </span>
+        <v-btn icon>
+          <v-avatar size="40px">
+            <img :src="user.imageUrl" alt="profile">
+          </v-avatar>
+        </v-btn>
+      </div>
     </v-toolbar>
 
     <v-content>
-      <slot></slot>
+      <div class="app-wrapper">
+        <slot></slot>
+      </div>
     </v-content>
   </div>
 </template>
@@ -46,6 +48,8 @@ export default {
 </script>
 
 <style>
-
+.app-wrapper {
+  padding: 10px;
+}
 </style>
 
