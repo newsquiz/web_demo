@@ -25,9 +25,9 @@
         </v-flex>
       </v-layout>
 
-      <div class="text-xs-center" style="margin-top: 20%">
+      <div class="text-xs-center" style="margin-top: 20%" v-if="loading" >
         <v-progress-circular indeterminate
-          v-if="loading" size="128" width="10"></v-progress-circular>
+          size="128" width="10"></v-progress-circular>
       </div>
     </app-frame>
 
