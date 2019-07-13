@@ -54,7 +54,6 @@ export default {
       const component = this
       const id = this.$route.params.quiz_id
       var url = `${process.env.VUE_APP_API_URL}/api/articles/${id}`
-      console.log(url)
       return axios.get(url, {
         headers: {
           'User-Id': '1'
