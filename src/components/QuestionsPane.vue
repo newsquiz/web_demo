@@ -1,6 +1,7 @@
 <template>
-  <v-card :height="height" style="overflow-y: auto">
-    <score-card v-if="finished"
+  <v-card :height="height" style="overflow-y: auto" id="pane">
+    <span id="pane-top"></span>
+    <score-card v-if="finished" 
       :totalQuestions="totalQuestions"
       :correctQuestions="totalCorrectQuestions"></score-card>
 
@@ -71,6 +72,10 @@ export default {
     submitAnswers() {
       this.showResult = true
       this.$store.commit('setFinished', true)
+      this.$scrollTo('#pane-top', 500, {
+        container: '#pane',
+        force: true
+      })
     },
     abort() {
       this.$router.push('/')

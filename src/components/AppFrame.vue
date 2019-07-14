@@ -31,7 +31,7 @@
 export default {
   props: {
     title: {
-      default: 'AppName'
+      default: 'EVA'
     }
   },
   data() {
@@ -48,6 +48,11 @@ export default {
 </script>
 
 <style>
+#app-text {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 20pt;
+}
+
 #app-text a {
   text-decoration: none;
   color: inherit;

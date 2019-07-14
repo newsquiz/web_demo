@@ -73,9 +73,10 @@ export default {
         const data = response.data.data
         component.article = data
         document.title = component.article.title
-        component.loading = false
       }).catch(error => {
         alert(error.message)
+      }).finally(() => {
+        component.loading = false
       })
     }
   },

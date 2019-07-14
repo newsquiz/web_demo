@@ -15,3 +15,10 @@ export default {
   }
 }
 </script>
+
+<style>
+body {
+  font-family: 'Roboto', 'Arial', sans-serif;
+}
+</style>
+
