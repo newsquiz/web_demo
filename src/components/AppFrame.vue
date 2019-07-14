@@ -31,7 +31,7 @@
 export default {
   props: {
     title: {
-      default: 'EVA'
+      default: 'NewsQuiz'
     }
   },
   data() {
