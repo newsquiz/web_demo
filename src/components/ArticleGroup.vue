@@ -58,9 +58,10 @@
             component.articles.push(data[i])
           }
           component.page += 1
-          this.loading = false
         }).catch(error => {
           console.log(error)
+        }).finally(() => {
+          component.loading = false
         })
       },
     },
