@@ -27,6 +27,12 @@
   import ArticleItem from '../components/ArticleItem'
   import axios from 'axios'
 
+  function shorten(s, length) {
+    length = length || 20
+    if (s.length <= length) return s
+    return s.slice(0, length) + '...'
+  }
+
   export default {
     components: {
         ArticleItem
@@ -55,6 +61,7 @@
         axios.get(url).then(response => {
           var data = response.data.data
           for (var i=0; i<data.length; i++) {
+            data[i].shortTitle = shorten(data[i].title, 20)
             component.articles.push(data[i])
           }
           component.page += 1

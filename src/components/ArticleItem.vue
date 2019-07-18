@@ -6,7 +6,7 @@
       :src="thumbnailUrl"></v-img>
     <v-card-title>
       <div>
-        <h2 class="headline">{{article.title}}</h2>
+        <h2 class="headline">{{article.shortTitle}}</h2>
         <span class="subtitle-text">
           Published on <span>{{displayDate}}</span> by 
           <a :href="article.source_url" target="_blank">
