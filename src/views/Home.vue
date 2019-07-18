@@ -26,7 +26,7 @@
     },
     data() {
       return {
-        activeTab: 'politics'
+        activeTab: 'technology'
       }
     },
     computed: {
