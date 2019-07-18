@@ -1,9 +1,9 @@
 <template>
   <v-container grid-list-lg>
     <div>
-      <h1>
+      <p class="topic-text">
         {{ `${topic.groupTitle || topic.name}` }}
-      </h1>
+      </p>
     </div>
     <v-layout row wrap>
       <v-flex v-for="article in articles" 
@@ -26,12 +26,6 @@
 <script>
   import ArticleItem from '../components/ArticleItem'
   import axios from 'axios'
-
-  function shorten(s, length) {
-    length = length || 20
-    if (s.length <= length) return s
-    return s.slice(0, length) + '...'
-  }
 
   export default {
     components: {
@@ -61,7 +55,6 @@
         axios.get(url).then(response => {
           var data = response.data.data
           for (var i=0; i<data.length; i++) {
-            data[i].shortTitle = shorten(data[i].title, 20)
             component.articles.push(data[i])
           }
           component.page += 1
@@ -77,3 +70,10 @@
     }
   }
 </script>
+
+<style scoped>
+.topic-text {
+  font-size: 28pt;
+}
+</style>
+

@@ -6,7 +6,7 @@
         {{ `${correctQuestions}/${totalQuestions}` }}
       </span>
       <span :class="`sub-score-text ${scoreColor}--text`">
-        {{ `${(correctRatio * 100).toFixed(2)}%` }}
+        {{ `${(correctRatio * 100).toFixed(0)}%` }}
       </span>
     </v-card-text>
   </v-card>

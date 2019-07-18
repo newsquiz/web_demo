@@ -1,12 +1,12 @@
 <template>
-  <v-card hover :href="'/quiz/' + article.id">    
+  <v-card hover :href="'/quiz/' + article.id" height="100%">    
     <v-img
       class="white--text"
       height="200px"
       :src="thumbnailUrl"></v-img>
     <v-card-title>
       <div>
-        <h2 class="headline">{{article.shortTitle}}</h2>
+        <h2 class="headline">{{ article.title }}</h2>
         <span class="subtitle-text">
           Published on <span>{{displayDate}}</span> by 
           <a :href="article.source_url" target="_blank">
@@ -32,6 +32,12 @@
 <script>
   function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+
+  function shorten(s, length) {
+    length = length || 20
+    if (s.length <= length) return s
+    return s.slice(0, length) + '...'
   }
 
   export default {
@@ -80,6 +86,9 @@
       displayType() {
         return capitalize(this.article.type)
       },
+      shortTitle() {
+        return shorten(this.article.title, 60)
+      }
     }
   }
 </script>

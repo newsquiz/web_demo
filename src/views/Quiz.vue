@@ -51,6 +51,12 @@ function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
+function processContent(s) {
+  s = `<p>${s}</p>`
+  s = s.replace('\n', '</p></p>')
+  return s
+}
+
 export default {
   components: {
     AppFrame, TextQuiz, AudioQuiz, AudioPlayer
@@ -73,6 +79,7 @@ export default {
         const data = response.data.data
         component.article = data
         document.title = component.article.title
+        component.article.content = processContent(component.article.content)
       }).catch(error => {
         alert(error.message)
       }).finally(() => {
