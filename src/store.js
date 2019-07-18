@@ -12,20 +12,20 @@ export default new Vuex.Store({
     finished: false,
     topics: [
       {
-        name: 'Politics',
-        value: 'politics'
+        name: 'Technology',
+        value: 'technology'
       },
       {
         name: 'Society',
         value: 'society'
       },
       {
-        name: 'Economy',
-        value: 'economy'
+        name: 'Health',
+        value: 'health'
       },
       {
         name: 'Sports',
-        value: 'sports'
+        value: 'sport'
       },
       {
         name: 'Recommended',

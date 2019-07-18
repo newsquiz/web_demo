@@ -13,7 +13,7 @@
         </span>
         <v-btn icon>
           <v-avatar size="40px">
-            <img :src="user.imageUrl" alt="profile">
+            <img :src="user.imageUrl" alt="">
           </v-avatar>
         </v-btn>
       </div>
