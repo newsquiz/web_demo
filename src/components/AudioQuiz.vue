@@ -51,12 +51,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .heading-text {
   font-style: italic;
-}
-
-.article-text {
-
 }
 </style>

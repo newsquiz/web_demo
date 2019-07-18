@@ -47,6 +47,6 @@ export default {
 }
 
 .article-text {
-
+  font-size: large;
 }
 </style>
