@@ -7,9 +7,11 @@ export default new Vuex.Store({
   state: {
     user: {
       name: 'John Doe',
-      imageUrl: 'https://previews.123rf.com/images/nomadsoul1/nomadsoul11402/nomadsoul1140200090/25932879-man-making-faces-square-shot.jpg'
+      imageUrl: 'https://previews.123rf.com/images/nomadsoul1/nomadsoul11402/nomadsoul1140200090/25932879-man-making-faces-square-shot.jpg',
+      stats: {
+        articlesToday: 5
+      }
     },
-    searchTerm: '',
     finished: false,
     topics: [
       {
@@ -38,9 +40,6 @@ export default new Vuex.Store({
   mutations: {
     setFinished(state, value) {
       state.finished = value
-    },
-    setSearchTerm(state, term) {
-      state.searchTerm = term
     }
   },
   actions: {

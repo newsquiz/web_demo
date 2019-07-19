@@ -6,6 +6,14 @@
 			</v-toolbar-title>
       
       <v-spacer></v-spacer>
+
+      <v-toolbar-items>
+        <v-btn icon ripple>
+          <v-avatar size="40">
+            <img :src="user.imageUrl" alt="">
+          </v-avatar>
+        </v-btn>
+      </v-toolbar-items>
     </v-toolbar>
 
     <v-content>
@@ -15,27 +23,54 @@
     </v-content>
 
     <v-bottom-nav app
-      color="transparent"
-      :active="navLocation"
+      color="white"
+      :active.sync="navLocation_"
       :value="true">
+
       <v-btn flat value="home" 
         shift color="primary"
-        to="/">
+        to="/" large>
         <span>Home</span>
         <v-icon>mdi-home</v-icon>
       </v-btn>
-
-      <v-btn flat value="profile" 
+      <v-btn flat value="topics" 
         shift color="primary"
-        to="/profile">
-        <span>Profile</span>
-        <v-icon>mdi-account</v-icon>
+        to="/topics" large>
+        <span>Topics</span>
+        <v-icon>mdi-apps</v-icon>
+      </v-btn>
+      
+      <v-btn flat value="my-content" 
+        shift color="primary"
+        to="/my-content" large>
+        <span>My Content</span>
+        <v-icon>mdi-wunderlist</v-icon>
+      </v-btn>
+
+      <v-btn flat value="search" 
+        shift color="primary"
+        @click="showSearch" large>
+        <span>Search</span>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-bottom-nav>
+    
+    <v-bottom-sheet v-model="search.show"
+      inset>
+        <v-text-field v-model="search.query"
+          append-icon="mdi-magnify"
+          solo single-line flat autofocus
+          class="search-field"
+          ref="searchField"
+          clearable
+          placeholder="Use keywords to search for articles eg. soccer, celebrities,..."
+          @keyup.enter="startSearch"></v-text-field>
+    </v-bottom-sheet>
   </div>
 </template>
 
 <script>
+import { setTimeout } from 'timers';
 export default {
   props: {
     title: {
@@ -50,12 +85,46 @@ export default {
   },
   data() {
     return {
-
+      search: {
+        show: false,
+        query: '',
+        prevNav: ''
+      },
+      navLocation_: ''
     }
   },
   computed: {
     user() {
       return this.$store.state.user
+    },
+    searchShowed() {
+      return this.search.show
+    }
+  },
+  watch: {
+    searchShowed(newVal) {
+      if (!newVal) {
+        this.navLocation_ = this.search.prevNav
+      }
+    }
+  },
+  mounted() {
+    this.navLocation_ = this.navLocation
+  },
+  methods: {
+    showSearch() {
+      this.search.prevNav = this.navLocation
+      this.search.show = true
+
+      const component = this
+      setTimeout( () => {
+        component.$refs.searchField.focus()
+      }, 400)
+    },
+    startSearch() {
+      var targetUrl = `/search?query=${this.search.query}`
+      this.search.show = false
+      this.$router.push(targetUrl)
     }
   }
 }
@@ -72,8 +141,9 @@ export default {
   color: inherit;
 }
 
-.app-wrapper {
-  /* padding: 10px; */
+.search-field {
+  margin-bottom: -20px;
+  
 }
 </style>
 

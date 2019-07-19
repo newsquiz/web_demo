@@ -24,9 +24,24 @@ export default new Router({
       component: () => import('./views/Profile.vue')
     },
     {
+      path: '/my-content',
+      name: 'my-content',
+      component: () => import('./views/MyContent.vue')
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('./views/Search.vue')
+    },
+    {
       path: '/quiz/:quiz_id',
       name: 'quiz',
       component: () => import('./views/Quiz.vue')
+    },
+    {
+      path: "*",
+      name: 'not-found',
+      component: () => import('./views/Page404.vue')
     }
   ]
 })

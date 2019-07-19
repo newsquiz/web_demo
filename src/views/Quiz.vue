@@ -105,7 +105,7 @@ export default {
         case 'easy':
           return 'green'
         case 'medium':
-          return 'yellow'
+          return '#ffb300'
         case 'hard':
           return 'red'
         default:

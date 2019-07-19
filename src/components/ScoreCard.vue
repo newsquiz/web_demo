@@ -30,7 +30,7 @@ export default {
     },
     scoreColor() {
       if (this.correctRatio < 0.3) return 'red'
-      else if (this.correctRatio < 0.6) return 'yellow'
+      else if (this.correctRatio < 0.6) return '#ffb300'
       else return 'green'
     }
   }

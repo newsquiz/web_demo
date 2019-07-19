@@ -1,30 +1,36 @@
 <template>
-  <v-card hover :href="'/quiz/' + article.id" height="100%">    
-    <v-img
-      class="white--text"
-      height="200px"
-      :src="thumbnailUrl"></v-img>
-    <v-card-title>
-      <div>
-        <h2 class="headline">{{ article.title }}</h2>
-        <span class="subtitle-text">
-          Published on <span>{{displayDate}}</span> by 
-          <a :href="article.source_url" target="_blank">
-            <b>{{article.publisher}}</b>
-          </a>
-        </span>
-      </div>
-    </v-card-title>
+  <v-card hover :href="'/quiz/' + article.id" height="100%">
+    <v-layout row wrap>
+      <v-flex xs12 sm5 lg4>
+        <v-img class="white--text"
+          height="150px"
+          :src="thumbnailUrl"></v-img>
+      </v-flex>
+      <v-flex xs12 sm7 lg8>
+        <v-card-title>
+          <div>
+            <h2 class="headline">{{ article.title }}</h2>
+            <span class="subtitle-text">
+              Published on <span>{{displayDate}}</span> by 
+              <a :href="article.source_url" target="_blank">
+                <b>{{article.publisher}}</b>
+              </a>
+            </span>
+          </div>
+        </v-card-title>
 
-    <v-card-actions style="margin-top: -5px">
-      <v-spacer></v-spacer>
-      <v-chip small label outline color="accent">
-        {{ displayType }}
-      </v-chip>
-      <v-chip small label dark :color="levelColor">
-        {{ displayLevel }}
-      </v-chip>
-    </v-card-actions>
+        <v-card-actions style="margin-top: -5px">
+          <v-chip small label outline color="accent">
+            {{ displayType }}
+          </v-chip>
+          <v-chip small label dark :color="levelColor">
+            {{ displayLevel }}
+          </v-chip>
+        </v-card-actions>
+      </v-flex>
+    </v-layout>
+    
+    
   </v-card>
 </template>
 
@@ -62,7 +68,7 @@
           case 'easy':
             return 'green'
           case 'medium':
-            return 'yellow'
+            return '#ffb300'
           case 'hard':
             return 'red'
           default:

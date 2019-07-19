@@ -1,5 +1,5 @@
 <template>
-  <app-frame navLocation="topics">
+  <app-frame navLocation="search">
     
   </app-frame>
 </template>
@@ -7,6 +7,7 @@
 <script>
 import AppFrame from '../components/AppFrame'
 import ArticleList from '../components/ArticleList'
+
 export default {
   components: {
     AppFrame,
@@ -18,9 +19,11 @@ export default {
     }
   },
   computed: {
-    topics() {
-      return this.$store.state.topics
-    }
+    
   }
 }
 </script>
+
+<style scoped>
+
+</style>
