@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-frame>
+    <app-frame :showNav="false">
       <v-layout row v-if="article" style="padding: 10px">
         <v-flex xs12 md10 offset-md1>
           <div class="text-xs-center">

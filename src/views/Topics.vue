@@ -9,8 +9,7 @@ import AppFrame from '../components/AppFrame'
 import ArticleList from '../components/ArticleList'
 export default {
   components: {
-    AppFrame,
-    ArticleList
+    AppFrame
   },
   data() {
     return {

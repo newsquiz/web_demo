@@ -17,13 +17,13 @@
               </h1>
               <article-horiz-list v-if="!recommended.loading"
                 :articles="recommended.articles"></article-horiz-list>
-              <div class="text-xs-center">
+              <div class="text-xs-center bottom-pad">
                 <v-progress-circular indeterminate
                 v-if="recommended.loading"
                 size="64"></v-progress-circular>
               </div>
               
-              <br></br>
+              <br>
               <h1 class="bottom-pad headline">
                 Latest news
               </h1>
@@ -136,6 +136,16 @@ export default {
   mounted() {
     this.loadNew()
     this.loadRecommended()
+
+    const component = this
+    window.onscroll = () => {
+      if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+        component.loadNew()        
+      }
+    }
+  },
+  beforeDestroy() {
+    window.onscroll = () => {}
   }
 }
 </script>
