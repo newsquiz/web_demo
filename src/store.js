@@ -16,19 +16,35 @@ export default new Vuex.Store({
     topics: [
       {
         name: 'Technology',
-        value: 'technology'
+        value: 'technology',
+        tile: {
+          gradient: 'to top right, #63a4ff, #004ba0',
+          icon: ''
+        }
       },
       {
         name: 'Society',
-        value: 'society'
+        value: 'society',
+        tile: {
+          gradient: 'to top left, #ab000d, #ff6f60',
+          icon: ''
+        }
       },
       {
         name: 'Health',
-        value: 'health'
+        value: 'health',
+        tile: {
+          gradient: 'to top, #8e24aa, #fdd835',
+          icon: ''
+        }
       },
       {
         name: 'Sports',
-        value: 'sport'
+        value: 'sport',
+        tile: {
+          gradient: 'to bottom left, #8bc34a, #f9a825',
+          icon: ''
+        }
       },
       {
         name: 'Recommended',
