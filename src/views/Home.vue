@@ -12,15 +12,28 @@
                 {{ `You've completed ${user.stats.articlesToday} articles today.` }}
               </p>
              
-              <h1 class="bottom-pad">
+              <h1 class="bottom-pad headline">
                 Recommended for you
               </h1>
+              <article-horiz-list v-if="!recommended.loading"
+                :articles="recommended.articles"></article-horiz-list>
+              <div class="text-xs-center">
+                <v-progress-circular indeterminate
+                v-if="recommended.loading"
+                size="64"></v-progress-circular>
+              </div>
               
-              <h1 class="bottom-pad">
+              <br></br>
+              <h1 class="bottom-pad headline">
                 Latest news
               </h1>
-              <article-list
+              <article-list 
                 :articles="latest.articles"></article-list>
+              <div class="text-xs-center">
+                <v-progress-circular indeterminate
+                v-if="latest.loading"
+                size="48"></v-progress-circular>
+              </div>
             </div>
         </v-flex>
       </v-layout>
@@ -33,24 +46,26 @@ import axios from 'axios'
 
 import AppFrame from '../components/AppFrame'
 import ArticleList from '../components/ArticleList'
+import ArticleHorizList from '../components/ArticleHorizList'
 
 export default {
   components: {
-    AppFrame, ArticleList
+    AppFrame, ArticleList, ArticleHorizList
   },
   data() {
     return {
       recommended: {
         articles: [],
         loading: false,
-        page: 0
+        page: 0,
+        itemsPerPage: 6
       },
       latest: {
         articles: [],
         loading: false,
-        page: 0
+        page: 0,
+        itemsPerPage: 12
       },
-      itemsPerPage: 12
     }
   },
   computed: {
@@ -83,8 +98,8 @@ export default {
   methods: {
     loadNew() {
       const component = this
-      const offset = this.itemsPerPage * this.latest.page
-      const url = `${process.env.VUE_APP_API_URL}/api/new/articles?start=${offset}&max_count=${this.itemsPerPage}`
+      const offset = this.latest.itemsPerPage * this.latest.page
+      const url = `${process.env.VUE_APP_API_URL}/api/new/articles?start=${offset}&max_count=${this.latest.itemsPerPage}`
 
       this.latest.loading = true
       return axios.get(url).then(response => {
@@ -101,8 +116,8 @@ export default {
     },
     loadRecommended() {
       const component = this
-      const offset = this.itemsPerPage * this.latest.page
-      const url = `${process.env.VUE_APP_API_URL}/api/recommended/articles?start=${offset}&max_count=${this.itemsPerPage}`
+      const offset = this.recommended.itemsPerPage * this.recommended.page
+      const url = `${process.env.VUE_APP_API_URL}/api/health/articles?start=${offset}&max_count=${this.recommended.itemsPerPage}`
 
       this.recommended.loading = true
       return axios.get(url).then(response => {
@@ -127,7 +142,8 @@ export default {
 
 <style scoped>
 .welcome-text {
-  font-size: 20pt;
+  font-weight: 500;
+  font-size: 24pt;
 }
 
 .bottom-pad {

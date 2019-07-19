@@ -10,14 +10,13 @@
 
 <script>
   import ArticleListItem from '../components/ArticleListItem'
-  import axios from 'axios'
 
   export default {
     components: {
         ArticleListItem
     },
     data: () => ({
-      page: 0,
+      
     }),
     props: {
       articles: Array
