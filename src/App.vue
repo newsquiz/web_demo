@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 body {
   font-family: 'Roboto', 'Arial', sans-serif;
 }

@@ -127,7 +127,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .title-text {
   font-size: 20pt;
   font-weight: 500;
@@ -136,6 +136,5 @@ export default {
 
 .subtitle-text {
   margin-top: -10px;
-  font-style: italic;
 }
 </style>

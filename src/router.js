@@ -14,11 +14,18 @@ export default new Router({
       component: Home
     },
     {
+      path: '/topics',
+      name: 'topics',
+      component: () => import('./views/Topics.vue')
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('./views/Profile.vue')
+    },
+    {
       path: '/quiz/:quiz_id',
       name: 'quiz',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('./views/Quiz.vue')
     }
   ]

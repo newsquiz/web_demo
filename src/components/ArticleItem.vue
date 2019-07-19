@@ -93,12 +93,12 @@
   }
 </script>
 
-<style>
+<style scoped>
 .capitalize:first-letter { 
   text-transform: uppercase; 
 }
 
 .subtitle-text {
-  font-style: italic;
+  font-size: small;
 }
 </style>

@@ -9,6 +9,7 @@ export default new Vuex.Store({
       name: 'John Doe',
       imageUrl: 'https://previews.123rf.com/images/nomadsoul1/nomadsoul11402/nomadsoul1140200090/25932879-man-making-faces-square-shot.jpg'
     },
+    searchTerm: '',
     finished: false,
     topics: [
       {
@@ -37,6 +38,9 @@ export default new Vuex.Store({
   mutations: {
     setFinished(state, value) {
       state.finished = value
+    },
+    setSearchTerm(state, term) {
+      state.searchTerm = term
     }
   },
   actions: {

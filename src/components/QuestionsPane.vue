@@ -84,7 +84,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .demargin {
   margin-bottom: -20px;
 }

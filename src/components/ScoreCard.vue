@@ -37,7 +37,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .prefix-text {
   font-size: 24pt;
 }

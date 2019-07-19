@@ -6,17 +6,6 @@
 			</v-toolbar-title>
       
       <v-spacer></v-spacer>
-
-      <div>
-        <span class="hidden-sm-and-down">
-          {{ `Welcome, ${user.name}` }}
-        </span>
-        <v-btn icon>
-          <v-avatar size="40px">
-            <img :src="user.imageUrl" alt="">
-          </v-avatar>
-        </v-btn>
-      </div>
     </v-toolbar>
 
     <v-content>
@@ -24,6 +13,25 @@
         <slot></slot>
       </div>
     </v-content>
+
+    <v-bottom-nav app
+      color="transparent"
+      :active="navLocation"
+      :value="true">
+      <v-btn flat value="home" 
+        shift color="primary"
+        to="/">
+        <span>Home</span>
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+
+      <v-btn flat value="profile" 
+        shift color="primary"
+        to="/profile">
+        <span>Profile</span>
+        <v-icon>mdi-account</v-icon>
+      </v-btn>
+    </v-bottom-nav>
   </div>
 </template>
 
@@ -32,6 +40,12 @@ export default {
   props: {
     title: {
       default: 'NewsQuiz'
+    },
+    showNav: {
+      default: true
+    },
+    navLocation: {
+      default: ''
     }
   },
   data() {
@@ -47,7 +61,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #app-text {
   font-family: 'Comfortaa', sans-serif;
   font-size: 20pt;
