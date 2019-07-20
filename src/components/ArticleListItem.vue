@@ -1,12 +1,7 @@
 <template>
   <v-card hover :href="'/quiz/' + article.id" height="100%">
     <v-layout row wrap>
-      <v-flex xs12 sm5 lg4>
-        <v-img class="white--text"
-          height="150px"
-          :src="thumbnailUrl"></v-img>
-      </v-flex>
-      <v-flex xs12 sm7 lg8>
+      <v-flex xs11>
         <v-card-title>
           <div>
             <h2 class="headline">{{ article.title }}</h2>
@@ -28,6 +23,12 @@
           </v-chip>
         </v-card-actions>
       </v-flex>
+
+      <v-flex xs1>
+        <div class="triangle-container">
+          <div :class="`triangle-down-right triangle-down-${article.topic}`"></div>
+        </div>
+      </v-flex>
     </v-layout>
     
     
@@ -36,67 +37,76 @@
 
 
 <script>
-  function capitalize(s) {
-    return s.charAt(0).toUpperCase() + s.slice(1)
-  }
+import GradientPane from '@/components/GradientPane'
 
-  function shorten(s, length) {
-    length = length || 20
-    if (s.length <= length) return s
-    return s.slice(0, length) + '...'
-  }
+function capitalize(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
 
-  export default {
-    data: () => ({
-    }),
-    props: {
-      article: {
-        default: {
-          id: 1,
-          thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
-          title: 'Number 10',
-          created_time: '25-07-2019',
-          level: 'beginner',
-          publisher: 'BBC news',
-          source_url: 'https://www.bbc.co.uk/'
-        }
-      }
-    },
-    computed: {
-      levelColor() {
-        switch (this.article.level) {
-          case 'easy':
-            return 'green'
-          case 'medium':
-            return '#ffb300'
-          case 'hard':
-            return 'red'
-          default:
-            return ''
-        }
-      },
-      displayDate: function() {
-        let current_datetime = new Date(Date.parse(this.article.created_time));
-        let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
-        return formatted_date
-      },
-      displayLevel() {
-        return capitalize(this.article.level)
-      },
-      thumbnailUrl() {
-        if (this.article.thumbnail.startsWith('http')) {
-          return this.article.thumbnail
-        }
-        return `${process.env.VUE_APP_API_URL}${this.article.thumbnail}`
-      },
-      displayType() {
-        return capitalize(this.article.type)
-      },
-      shortTitle() {
-        return shorten(this.article.title, 60)
+function shorten(s, length) {
+  length = length || 20
+  if (s.length <= length) return s
+  return s.slice(0, length) + '...'
+}
+
+export default {
+  components: {
+    GradientPane
+  },
+  mounted() {
+    
+  },
+  data: () => ({
+
+  }),
+  props: {
+    article: {
+      default: {
+        id: 1,
+        thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
+        title: 'Number 10',
+        created_time: '25-07-2019',
+        level: 'beginner',
+        publisher: 'BBC news',
+        source_url: 'https://www.bbc.co.uk/'
       }
     }
+  },
+  computed: {
+    levelColor() {
+      switch (this.article.level) {
+        case 'easy':
+          return 'green'
+        case 'medium':
+          return '#ffb300'
+        case 'hard':
+          return 'red'
+        default:
+          return ''
+      }
+    },
+    displayDate: function() {
+      let current_datetime = new Date(Date.parse(this.article.created_time));
+      let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
+      return formatted_date
+    },
+    displayLevel() {
+      return capitalize(this.article.level)
+    },
+    thumbnailUrl() {
+      if (this.article.thumbnail.startsWith('http')) {
+        return this.article.thumbnail
+      }
+      return `${process.env.VUE_APP_API_URL}${this.article.thumbnail}`
+    },
+    displayType() {
+      return capitalize(this.article.type)
+    },
+    shortTitle() {
+      return shorten(this.article.title, 60)
+    }
   }
+}
 </script>
 
 <style scoped>
@@ -106,5 +116,11 @@
 
 .subtitle-text {
   font-size: small;
+}
+
+.triangle-container {
+  display: flex;
+  justify-content: end;
+  height: 100%;
 }
 </style>

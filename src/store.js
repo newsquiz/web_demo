@@ -18,7 +18,6 @@ export default new Vuex.Store({
         name: 'Technology',
         value: 'technology',
         tile: {
-          gradient: 'to top right, #63a4ff, #004ba0',
           icon: ''
         }
       },
@@ -26,7 +25,6 @@ export default new Vuex.Store({
         name: 'Society',
         value: 'society',
         tile: {
-          gradient: 'to top left, #ab000d, #ff6f60',
           icon: ''
         }
       },
@@ -34,7 +32,6 @@ export default new Vuex.Store({
         name: 'Health',
         value: 'health',
         tile: {
-          gradient: 'to top, #8e24aa, #fdd835',
           icon: ''
         }
       },
@@ -42,7 +39,13 @@ export default new Vuex.Store({
         name: 'Sports',
         value: 'sport',
         tile: {
-          gradient: 'to bottom left, #8bc34a, #f9a825',
+          icon: ''
+        }
+      },
+      {
+        name: 'Business',
+        value: 'business',
+        tile: {
           icon: ''
         }
       },

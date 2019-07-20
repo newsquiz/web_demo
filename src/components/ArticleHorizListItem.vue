@@ -2,7 +2,7 @@
   <v-card hover :href="'/quiz/' + article.id" height="100%">
     <v-img class="white--text"
       height="250px"
-      :src="thumbnailUrl">
+      src="">
         <v-layout align-end justify-end row fill-height wrap>
           <v-flex xs12 class="overlay-text">
             <p class="title" style="margin-bottom: 5px">

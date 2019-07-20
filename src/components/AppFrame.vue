@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar app color="primary" flat dark>
+    <v-toolbar app :color="barColor" flat dark>
       <v-toolbar-title id="app-text">
 				<a href="/">{{ title }}</a>
 			</v-toolbar-title>
@@ -23,32 +23,33 @@
     </v-content>
 
     <v-bottom-nav app
-      color="white"
+      color="secondary"
       :active.sync="navLocation_"
-      :value="true">
+      :value="true" dark
+      v-if="showNav">
 
       <v-btn flat value="home" 
-        shift color="primary"
+        shift color="accent"
         to="/" large>
         <span>Home</span>
         <v-icon>mdi-home</v-icon>
       </v-btn>
       <v-btn flat value="topics" 
-        shift color="primary"
+        shift color="accent"
         to="/topics" large>
         <span>Topics</span>
         <v-icon>mdi-apps</v-icon>
       </v-btn>
       
       <v-btn flat value="my-content" 
-        shift color="primary"
+        shift color="accent"
         to="/my-content" large>
         <span>My Content</span>
         <v-icon>mdi-wunderlist</v-icon>
       </v-btn>
 
       <v-btn flat value="search" 
-        shift color="primary"
+        shift color="accent"
         @click="showSearch" large>
         <span>Search</span>
         <v-icon>mdi-magnify</v-icon>
@@ -81,6 +82,9 @@ export default {
     },
     navLocation: {
       default: ''
+    },
+    barColor: {
+      default: 'primary'
     }
   },
   data() {

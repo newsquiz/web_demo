@@ -1,0 +1,38 @@
+.triangle-down-right {
+    width: 50%;
+    height: 0;
+    padding-top: 50%;
+    overflow: hidden;
+    display: inline-block;
+    align-self: flex-end;
+    justify-self: end;
+}
+.triangle-down-right:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-top:-500px;
+    border-top: 500px solid transparent;
+    border-right: 500px solid #4679BD;
+}
+
+.triangle-down-technology:after {
+    border-right-color: #01579b;
+}
+
+.triangle-down-society:after {
+    border-right-color: #ff6f00;
+}
+
+.triangle-down-health:after {
+    border-right-color: #e91e63;
+}
+
+.triangle-down-sport:after {
+    border-right-color: #087f23;
+}
+
+.triangle-down-business:after {
+    border-right-color: #9c27b0;
+}
