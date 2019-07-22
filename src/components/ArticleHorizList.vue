@@ -1,10 +1,10 @@
 <template>
-  <v-carousel height="250px" 
+  <v-carousel height="300px" 
     :cycle="false" hide-delimiters>
     <v-carousel-item v-for="(group, i) in articleGroups" :key="i">
       <v-layout row align-center justify-center>
       <v-flex v-for="(article, index) in group" 
-        :key="article.id" xs12 sm6 lg4 
+        :key="article.id" xs12
         class="bottom-pad" d-flex>
           <article-horiz-list-item :article="article"
             :style="index < itemsPerPage - 1 ? 'margin-right: 10px' : ''"/>
@@ -31,13 +31,11 @@ export default {
     itemsPerPage() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
-          return 1
         case 'sm':
-          return 2
         case 'md':
         case 'lg':
         case 'xl':
-          return 3
+          return 1
       }
     },
     currentArticles() {

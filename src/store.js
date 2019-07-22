@@ -18,35 +18,35 @@ export default new Vuex.Store({
         name: 'Technology',
         value: 'technology',
         tile: {
-          icon: ''
+          background: '/images/technology.jpg'
         }
       },
       {
         name: 'Society',
         value: 'society',
         tile: {
-          icon: ''
+          background: '/images/society.jpg'
         }
       },
       {
         name: 'Health',
         value: 'health',
         tile: {
-          icon: ''
+          background: '/images/health.png'
         }
       },
       {
         name: 'Sports',
         value: 'sport',
         tile: {
-          icon: ''
+          background: '/images/sport.jpg'
         }
       },
       {
         name: 'Business',
         value: 'business',
         tile: {
-          icon: ''
+          background: '/images/business.png'
         }
       },
       {

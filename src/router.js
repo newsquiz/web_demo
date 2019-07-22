@@ -19,6 +19,11 @@ export default new Router({
       component: () => import('./views/Topics.vue')
     },
     {
+      path: '/topics/:topic',
+      name: 'topic-view',
+      component: () => import('./views/TopicView.vue')
+    },
+    {
       path: '/profile',
       name: 'profile',
       component: () => import('./views/Profile.vue')

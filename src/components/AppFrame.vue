@@ -23,33 +23,34 @@
     </v-content>
 
     <v-bottom-nav app
-      color="secondary"
+      color="white"
       :active.sync="navLocation_"
-      :value="true" dark
+      :value="true"
+      class="bottom-nav"
       v-if="showNav">
 
       <v-btn flat value="home" 
-        shift color="accent"
+        shift :color="accentColor"
         to="/" large>
         <span>Home</span>
         <v-icon>mdi-home</v-icon>
       </v-btn>
       <v-btn flat value="topics" 
-        shift color="accent"
+        shift :color="accentColor"
         to="/topics" large>
         <span>Topics</span>
         <v-icon>mdi-apps</v-icon>
       </v-btn>
       
       <v-btn flat value="my-content" 
-        shift color="accent"
+        shift :color="accentColor"
         to="/my-content" large>
         <span>My Content</span>
         <v-icon>mdi-wunderlist</v-icon>
       </v-btn>
 
       <v-btn flat value="search" 
-        shift color="accent"
+        shift :color="accentColor"
         @click="showSearch" large>
         <span>Search</span>
         <v-icon>mdi-magnify</v-icon>
@@ -58,6 +59,7 @@
     
     <v-bottom-sheet v-model="search.show"
       inset>
+      <v-card flat>
         <v-text-field v-model="search.query"
           append-icon="mdi-magnify"
           solo single-line flat autofocus
@@ -66,6 +68,9 @@
           clearable
           placeholder="Use keywords to search for articles eg. soccer, celebrities,..."
           @keyup.enter="startSearch"></v-text-field>
+        
+        
+      </v-card>
     </v-bottom-sheet>
   </div>
 </template>
@@ -85,6 +90,9 @@ export default {
     },
     barColor: {
       default: 'primary'
+    },
+    accentColor: {
+      default: 'secondary'
     }
   },
   data() {
@@ -147,7 +155,10 @@ export default {
 
 .search-field {
   margin-bottom: -20px;
-  
+}
+
+.bottom-nav {
+  border-top: solid 1px #424242 !important;
 }
 </style>
 

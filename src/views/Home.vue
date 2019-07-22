@@ -4,37 +4,37 @@
       <v-layout fill-height row wrap>
         <v-flex xs12 md10 offset-md1 
           lg8 offset-lg2 d-flex fill-height>
-            <div>
-              <p class="welcome-text">
-                {{ welcomeMessage }}
-              </p>
-              <p v-if="user">
-                {{ `You've completed ${user.stats.articlesToday} articles today.` }}
-              </p>
-             
-              <h1 class="bottom-pad headline">
-                Recommended for you
-              </h1>
-              <article-horiz-list v-if="!recommended.loading"
-                :articles="recommended.articles"></article-horiz-list>
-              <div class="text-xs-center bottom-pad">
-                <v-progress-circular indeterminate
-                v-if="recommended.loading"
-                size="64"></v-progress-circular>
-              </div>
-              
-              <br>
-              <h1 class="bottom-pad headline">
-                Latest news
-              </h1>
-              <article-list 
-                :articles="latest.articles"></article-list>
-              <div class="text-xs-center">
-                <v-progress-circular indeterminate
-                v-if="latest.loading"
-                size="48"></v-progress-circular>
-              </div>
+          <div>
+            <p class="welcome-text">
+              {{ welcomeMessage }}
+            </p>
+            <p v-if="user">
+              {{ `You've completed ${user.stats.articlesToday} articles today.` }}
+            </p>
+            
+            <h1 class="bottom-pad headline">
+              Recommended for you
+            </h1>
+            <article-horiz-list v-if="!recommended.loading"
+              :articles="recommended.articles"></article-horiz-list>
+            <div class="text-xs-center bottom-pad">
+              <v-progress-circular indeterminate
+              v-if="recommended.loading"
+              size="64"></v-progress-circular>
             </div>
+              
+            <br>
+            <h1 class="bottom-pad headline">
+              Latest news
+            </h1>
+            <article-list 
+              :articles="latest.articles"></article-list>
+            <div class="text-xs-center">
+              <v-progress-circular indeterminate
+              v-if="latest.loading"
+              size="48"></v-progress-circular>
+            </div>
+          </div>
         </v-flex>
       </v-layout>
     </v-container>
@@ -134,15 +134,16 @@ export default {
     }
   },
   mounted() {
-    this.loadNew()
-    this.loadRecommended()
-
     const component = this
-    window.onscroll = () => {
-      if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-        component.loadNew()        
+    Promise.all([
+      this.loadNew(), this.loadRecommended()
+    ]).then(() => {
+      window.onscroll = () => {
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+          component.loadNew()        
+        }
       }
-    }
+    })
   },
   beforeDestroy() {
     window.onscroll = () => {}

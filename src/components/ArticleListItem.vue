@@ -1,7 +1,8 @@
 <template>
-  <v-card hover :href="'/quiz/' + article.id" height="100%">
+  <v-card hover :href="'/quiz/' + article.id" height="100%"
+    :class="`card-item card-${article.topic}`">
     <v-layout row wrap>
-      <v-flex xs11>
+      <v-flex xs12>
         <v-card-title>
           <div>
             <h2 class="headline">{{ article.title }}</h2>
@@ -24,11 +25,11 @@
         </v-card-actions>
       </v-flex>
 
-      <v-flex xs1>
+      <!-- <v-flex xs1>
         <div class="triangle-container">
           <div :class="`triangle-down-right triangle-down-${article.topic}`"></div>
         </div>
-      </v-flex>
+      </v-flex> -->
     </v-layout>
     
     
@@ -120,7 +121,7 @@ export default {
 
 .triangle-container {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   height: 100%;
 }
 </style>

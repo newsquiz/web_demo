@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fill-height>
     <v-layout align-center justify-center 
       row fill-height>
       <v-flex xs12 md6>

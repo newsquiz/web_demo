@@ -1,11 +1,11 @@
 .triangle-down-right {
-    width: 50%;
+    width: 30%;
     height: 0;
-    padding-top: 50%;
+    padding-top: 30%;
     overflow: hidden;
     display: inline-block;
     align-self: flex-end;
-    justify-self: end;
+    justify-self: flex-end;
 }
 .triangle-down-right:after {
     content: "";
@@ -35,4 +35,28 @@
 
 .triangle-down-business:after {
     border-right-color: #9c27b0;
+}
+
+.card-item {
+    border-top: solid 3px #424242;
+}
+
+.card-technology {
+    border-top-color: #01579b !important;
+}
+
+.card-society {
+    border-top-color: #ff6f00 !important;
+}
+
+.card-health {
+    border-top-color: #e91e63 !important;
+}
+
+.card-sport {
+    border-top-color: #087f23 !important;
+}
+
+.card-business {
+    border-top-color: #9c27b0 !important;
 }

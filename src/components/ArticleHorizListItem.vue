@@ -1,13 +1,17 @@
 <template>
-  <v-card hover :href="'/quiz/' + article.id" height="100%">
-    <v-img class="white--text"
-      height="250px"
-      src="">
+  <v-card hover
+    :href="'/quiz/' + article.id" height="100%">
+    <v-img contain
+      height="300px"
+      :src="article.thumbnail">
         <v-layout align-end justify-end row fill-height wrap>
-          <v-flex xs12 class="overlay-text">
-            <p class="title" style="margin-bottom: 5px">
+          <v-flex xs12
+            :class="`overlay-text card-item card-${article.topic}`">
+            <div class="title-wrap">
+              <p class="title" style="">
               {{ shortTitle }}
             </p>
+            </div>
             <v-chip small label outline color="accent">
               {{ displayType }}
             </v-chip>
@@ -39,7 +43,7 @@
       article: {
         default: {
           id: 1,
-          thumbnailUrl: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
+          thumbnail: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg',
           title: 'Number 10',
           created_time: '25-07-2019',
           level: 'beginner',
@@ -79,7 +83,8 @@
         return capitalize(this.article.type)
       },
       shortTitle() {
-        return shorten(this.article.title, 25)
+        // return shorten(this.article.title, 40)
+        return this.article.title
       }
     }
   }
@@ -99,8 +104,16 @@
 }
 
 .overlay-text {
-  background-color: rgb(73, 72, 72);
+  padding: 10px;
+  background-color: rgb(70, 68, 68);
   opacity: 0.85;
-  padding: 5px;
+}
+
+.title-wrap {
+  margin-bottom: 5px; 
+}
+
+.blurred {
+  opacity: 0.6;
 }
 </style>

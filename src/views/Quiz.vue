@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-frame :showNav="false">
+    <app-frame :showNav="false" :barColor="barColor">
       <v-layout row v-if="article" style="padding: 10px">
         <v-flex xs12 md10 offset-md1>
           <div class="text-xs-center">
@@ -31,9 +31,9 @@
       </div>
     </app-frame>
 
-    <v-footer app color="accent" dark height="64"
+    <v-footer app :color="'white'" dark height="64"
       v-if="article && article.type == 'audio'" style="padding: 0">
-      <audio-player color="white"
+      <audio-player :color="barColor"
         :file="audioUrl"></audio-player>
     </v-footer>
   </div>
@@ -80,6 +80,7 @@ export default {
         component.article = data
         document.title = component.article.title
         component.article.content = processContent(component.article.content)
+        component.barColor = component.article.topic
       }).catch(error => {
         alert(error.message)
       }).finally(() => {
@@ -121,7 +122,8 @@ export default {
   data() {
     return {
       article: null,
-      loading: false
+      loading: false,
+      barColor: 'primary'
     }
   }
 }
