@@ -4,10 +4,10 @@
       <v-tabs mandatory grow
         v-model="activeTab"
         :color="article.topic"
-        :slider-color="article.topic"
+        slider-color="white"
         dark centered>
-        <v-tab>Article</v-tab>
-        <v-tab>Questions</v-tab>
+        <v-tab><v-icon>mdi-clipboard-text-outline</v-icon></v-tab>
+        <v-tab><v-icon>mdi-pencil</v-icon></v-tab>
 
         <v-tab-item>
           <text-content-pane :article="article"

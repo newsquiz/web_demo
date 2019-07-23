@@ -4,7 +4,17 @@
     <v-layout row wrap>
       <v-flex xs12 sm4 lg3>
         <v-img :src="article.thumbnail"
-          height="150px"></v-img>
+          height="150px">
+          <v-layout align-center justify-center row fill-height>
+            <v-flex xs12 v-if="article.type === 'audio'">
+              <div class="text-xs-center">
+                <v-btn fab icon depressed outline color="white">
+                  <v-icon size="48">mdi-play</v-icon>
+                </v-btn>
+              </div>
+            </v-flex>
+          </v-layout>
+        </v-img>
       </v-flex>
       <v-flex xs12 sm8 lg9 :class="`card-item card-${article.topic}`">
         <v-card-title>

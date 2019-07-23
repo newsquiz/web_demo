@@ -92,6 +92,7 @@
 
 <script>
 import { setTimeout } from 'timers';
+
 export default {
   props: {
     title: {
