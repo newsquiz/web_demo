@@ -16,10 +16,16 @@
 
     <slot name="subheader"></slot>
 
-    <v-card-text>
+    <v-card-text v-if="showContent">
       <div v-html="article.content" 
       class="article-text"></div>
     </v-card-text>
+    <v-layout v-else style="height: 60%"
+      align-center justify-center row>
+      <v-flex xs12 class="text-xs-center">
+        <v-icon size="256" style="opacity: 0.5">mdi-cancel</v-icon>
+      </v-flex>
+    </v-layout>
   </v-card>
 </template>
 
@@ -39,6 +45,9 @@ export default {
     article: Object,
     height: {
       default: '100%'
+    },
+    showContent: {
+      default: true
     }
   },
   computed: {

@@ -43,13 +43,6 @@ export default {
   computed: {
     finished() {
       return this.$store.state.finished
-    },
-    subheaderText() {
-      if (this.finished) {
-        return 'Audio transcript'
-      } else {
-        return 'Finish and submit your answers to view audio transcript'
-      }
     }
   }
 }
