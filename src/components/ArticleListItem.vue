@@ -1,8 +1,12 @@
 <template>
   <v-card hover :href="'/quiz/' + article.id" height="100%"
-    :class="`card-item card-${article.topic}`">
+    >
     <v-layout row wrap>
-      <v-flex xs12>
+      <v-flex xs12 sm4 lg3>
+        <v-img :src="article.thumbnail"
+          height="150px"></v-img>
+      </v-flex>
+      <v-flex xs12 sm8 lg9 :class="`card-item card-${article.topic}`">
         <v-card-title>
           <div>
             <h2 class="headline">{{ article.title }}</h2>
@@ -25,11 +29,6 @@
         </v-card-actions>
       </v-flex>
 
-      <!-- <v-flex xs1>
-        <div class="triangle-container">
-          <div :class="`triangle-down-right triangle-down-${article.topic}`"></div>
-        </div>
-      </v-flex> -->
     </v-layout>
     
     

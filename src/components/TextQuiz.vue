@@ -1,23 +1,15 @@
 <template>
-  <v-container grid-list-lg>
+  <v-container fill-height fluid>
     <v-layout row wrap>
       <v-flex xs12 md6>
-        <v-card height="70vh" style="overflow-y: auto">
-          <v-card-title>
-            <span class="heading-text">
-              <v-icon small>mdi-pencil</v-icon> Read the article and answer the questions.
-            </span>
-          </v-card-title>
-
-          <v-card-text>
-            <div v-html="article.content" class="article-text"></div>
-          </v-card-text>
-        </v-card>
+        <text-content-pane :article="article"
+          height="85vh">
+        </text-content-pane>
       </v-flex>
-
+    
       <v-flex xs12 md6>
         <questions-pane :questions="article.questions"
-          :article_id="article.id" :height="'70vh'"></questions-pane>
+          :article_id="article.id" height="85vh"></questions-pane>
       </v-flex>
     </v-layout>
   </v-container>
@@ -25,10 +17,11 @@
 
 <script>
 import QuestionsPane from '@/components/QuestionsPane'
+import TextContentPane from '@/components/TextContentPane'
 
 export default {
   components: {
-    QuestionsPane
+    QuestionsPane, TextContentPane
   },
   data() {
     return {
@@ -41,12 +34,6 @@ export default {
 }
 </script>
 
-<style>
-.heading-text {
-  font-style: italic;
-}
+<style scoped>
 
-.article-text {
-  font-size: large;
-}
 </style>

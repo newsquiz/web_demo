@@ -1,13 +1,13 @@
 <template>
   <v-card hover
     :href="'/quiz/' + article.id" height="100%">
-    <v-img contain
+    <v-img
       height="300px"
       :src="article.thumbnail">
         <v-layout align-end justify-end row fill-height wrap>
           <v-flex xs12
             :class="`overlay-text card-item card-${article.topic}`">
-            <div class="title-wrap">
+            <div class="title-wrap black--text">
               <p class="title" style="">
               {{ shortTitle }}
             </p>
@@ -105,8 +105,8 @@
 
 .overlay-text {
   padding: 10px;
-  background-color: rgb(70, 68, 68);
-  opacity: 0.85;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.75;
 }
 
 .title-wrap {

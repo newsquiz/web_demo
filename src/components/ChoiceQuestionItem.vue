@@ -6,15 +6,11 @@
     <v-radio-group v-model="question.userAnswer"
       :success-messages="correctStr"
       :error-messages="incorrectStr"
-      :readonly="showResult" row>
-      <v-layout row wrap>
-        <v-flex v-for="opt in question.options" :key="opt"
-          xs12 md6>
-          <v-radio 
-            :label="opt" :value="opt">
-          </v-radio> 
-        </v-flex>
-      </v-layout>
+      :readonly="showResult" :row="useRow">
+      <v-radio v-for="opt in question.options" :key="opt"
+      xs12 md6
+        :label="opt" :value="opt">
+      </v-radio> 
     </v-radio-group>
   </div>
 </template>
@@ -46,6 +42,17 @@ export default {
         return `The correct answer is '${this.question.answer}'`
       }
       return []
+    },
+    useRow() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+        case 'sm':
+          return false
+        case 'md':
+        case 'lg':
+        case 'xl':
+          return true
+      }
     }
   }
 }

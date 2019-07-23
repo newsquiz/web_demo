@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Toolbar -->
     <v-toolbar app :color="barColor" flat dark>
       <v-toolbar-title id="app-text">
 				<a href="/">{{ title }}</a>
@@ -16,12 +17,12 @@
       </v-toolbar-items>
     </v-toolbar>
 
+    <!-- Slot content -->
     <v-content>
-      <div class="app-wrapper">
-        <slot></slot>
-      </div>
+      <slot></slot>
     </v-content>
-
+    
+    <!-- Bottom nav -->
     <v-bottom-nav app
       color="white"
       :active.sync="navLocation_"
@@ -57,6 +58,7 @@
       </v-btn>
     </v-bottom-nav>
     
+    <!-- Search sheet -->
     <v-bottom-sheet v-model="search.show"
       inset>
       <v-card flat>
@@ -69,7 +71,20 @@
           placeholder="Use keywords to search for articles eg. soccer, celebrities,..."
           @keyup.enter="startSearch"></v-text-field>
         
-        
+        <v-expansion-panel expand>
+          <v-expansion-panel-content>
+            <template v-slot:header>
+              <div>
+                <v-icon small style="margin-right: 5px">mdi-settings</v-icon>
+                <span>Advanced</span>
+              </div>
+              
+            </template>
+            <v-card>
+
+            </v-card>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
       </v-card>
     </v-bottom-sheet>
   </div>
@@ -92,7 +107,7 @@ export default {
       default: 'primary'
     },
     accentColor: {
-      default: 'secondary'
+      default: 'primary'
     }
   },
   data() {
@@ -100,7 +115,10 @@ export default {
       search: {
         show: false,
         query: '',
-        prevNav: ''
+        prevNav: '',
+        advancedOpts: {
+
+        }
       },
       navLocation_: ''
     }

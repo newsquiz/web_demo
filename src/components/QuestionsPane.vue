@@ -5,6 +5,11 @@
       :totalQuestions="totalQuestions"
       :correctQuestions="totalCorrectQuestions"></score-card>
 
+    <v-card-text>
+      <v-icon class="mr-1">mdi-pencil</v-icon>
+      <span class="header-text">Questions</span>
+    </v-card-text>
+
     <v-card-text v-for="(qst, index) in questions" :key="qst.id"
       class="demargin">
       <fill-question-item v-if="qst.type == 'fill'"
@@ -66,7 +71,9 @@ export default {
   props: {
     questions: Array,
     article_id: String,
-    height: String
+    height: {
+      default: '100%'
+    }
   },
   methods: {
     submitAnswers() {
@@ -87,5 +94,10 @@ export default {
 <style scoped>
 .demargin {
   margin-bottom: -20px;
+}
+
+.header-text {
+  font-size: 18pt;
+  font-weight: 600;
 }
 </style>

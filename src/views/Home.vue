@@ -3,7 +3,7 @@
     <v-container fluid fill-height>
       <v-layout fill-height row wrap>
         <v-flex xs12 md10 offset-md1 
-          lg8 offset-lg2 d-flex fill-height>
+          lg8 offset-lg2 xl6 offset-xl3 d-flex fill-height>
           <div>
             <p class="welcome-text">
               {{ welcomeMessage }}
@@ -117,7 +117,7 @@ export default {
     loadRecommended() {
       const component = this
       const offset = this.recommended.itemsPerPage * this.recommended.page
-      const url = `${process.env.VUE_APP_API_URL}/api/health/articles?start=${offset}&max_count=${this.recommended.itemsPerPage}`
+      const url = `${process.env.VUE_APP_API_URL}/api/technology/articles?start=${offset}&max_count=${this.recommended.itemsPerPage}`
 
       this.recommended.loading = true
       return axios.get(url).then(response => {
