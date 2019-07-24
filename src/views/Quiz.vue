@@ -7,8 +7,10 @@
             :article="article"></text-quiz>
           <text-quiz-mobile v-if="article.type == 'text' && isMobile"
             :article="article"></text-quiz-mobile>
-          <audio-quiz v-else-if="article.type == 'audio'"
+          <audio-quiz v-else-if="article.type == 'audio' && !isMobile"
             :article="article"></audio-quiz>
+          <audio-quiz-mobile v-else-if="article.type == 'audio' && isMobile"
+            :article="article"></audio-quiz-mobile>
         </v-flex>
       </v-layout>
 
@@ -31,6 +33,7 @@ import AppFrame from '@/components/AppFrame'
 import TextQuiz from '@/components/TextQuiz'
 import TextQuizMobile from '@/components/TextQuizMobile'
 import AudioQuiz from '@/components/AudioQuiz'
+import AudioQuizMobile from '@/components/AudioQuizMobile'
 import AudioPlayer from '@/components/AudioPlayer'
 
 import axios from 'axios'
@@ -45,7 +48,7 @@ function processContent(s) {
 export default {
   components: {
     AppFrame, TextQuiz, AudioQuiz, AudioPlayer,
-    TextQuizMobile
+    TextQuizMobile, AudioQuizMobile
   },
   mounted() {
     this.$store.commit('setFinished', false)

@@ -1,5 +1,6 @@
 <template>
-  <v-card :height="height" style="overflow-y: auto" id="pane">
+  <v-card :height="height" style="overflow-y: auto" id="pane"
+    class="left-border">
     <span id="pane-top"></span>
     <score-card v-if="finished" 
       :totalQuestions="totalQuestions"
@@ -94,6 +95,10 @@ export default {
 <style scoped>
 .demargin {
   margin-bottom: -20px;
+}
+
+.left-border {
+  border-left: solid 1px #959595;
 }
 
 .header-text {

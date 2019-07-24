@@ -93,7 +93,7 @@ export default {
 }
 
 .right-border {
-  border-right: solid 2px #959595;
+  border-right: solid 1px #959595;
 }
 
 .title-text {
