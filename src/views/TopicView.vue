@@ -67,6 +67,8 @@ export default {
       return x.value === topicName
     })
 
+    document.title = `${this.topic.name} - NewsQuiz`
+
     const component = this
     this.loadMore().then(() => {
       window.onscroll = () => {

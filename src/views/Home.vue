@@ -57,13 +57,11 @@ export default {
       recommended: {
         articles: [],
         loading: false,
-        page: 0,
         itemsPerPage: 6
       },
       latest: {
         articles: [],
         loading: false,
-        page: 0,
         itemsPerPage: 12
       },
     }
@@ -98,7 +96,7 @@ export default {
   methods: {
     loadNew() {
       const component = this
-      const offset = this.latest.itemsPerPage * this.latest.page
+      const offset = this.latest.articles.length
       const url = `${process.env.VUE_APP_API_URL}/api/new/articles?start=${offset}&max_count=${this.latest.itemsPerPage}`
 
       this.latest.loading = true
@@ -116,7 +114,7 @@ export default {
     },
     loadRecommended() {
       const component = this
-      const offset = this.recommended.itemsPerPage * this.recommended.page
+      const offset = this.recommended.articles.length
       const url = `${process.env.VUE_APP_API_URL}/api/technology/articles?start=${offset}&max_count=${this.recommended.itemsPerPage}`
 
       this.recommended.loading = true
@@ -135,6 +133,8 @@ export default {
   },
   mounted() {
     const component = this
+
+    document.title = 'NewsQuiz'
     Promise.all([
       this.loadNew(), this.loadRecommended()
     ]).then(() => {

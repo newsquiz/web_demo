@@ -38,7 +38,8 @@
       </v-btn>
       <v-btn flat value="topics" 
         shift :color="accentColor"
-        to="/topics" large>
+        id="topics-btn" large
+        @click="topicsMenu.show = true">
         <span>Topics</span>
         <v-icon>mdi-apps</v-icon>
       </v-btn>
@@ -87,13 +88,44 @@
         </v-expansion-panel>
       </v-card>
     </v-bottom-sheet>
+
+    <!-- Topics menu -->
+    <v-dialog
+      attach="body"
+      scrollable
+      v-model="topicsMenu.show"
+      lazy>
+      <v-card height="70vh">
+        <v-card-title>
+          <v-spacer></v-spacer>
+          <span class="menu-header-text">Choose a topic</span>
+          <v-spacer></v-spacer>
+        </v-card-title>
+        <v-card-text style="margin-top: -10px">
+          <topics-pane></topics-pane>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn @click="topicsMenu.show = false"
+            round color="error">
+            Close
+          </v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-import { setTimeout } from 'timers';
+import { setTimeout } from 'timers'
+
+import TopicsPane from '../components/TopicsPane'
 
 export default {
+  components: {
+    TopicsPane
+  },
   props: {
     title: {
       default: 'NewsQuiz'
@@ -121,7 +153,10 @@ export default {
 
         }
       },
-      navLocation_: ''
+      navLocation_: '',
+      topicsMenu: {
+        show: false
+      }
     }
   },
   computed: {
@@ -178,6 +213,11 @@ export default {
 
 .bottom-nav {
   border-top: solid 1px #424242 !important;
+}
+
+.menu-header-text {
+  font-size: 24pt;
+  font-weight: 400;
 }
 </style>
 

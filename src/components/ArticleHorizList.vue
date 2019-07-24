@@ -1,6 +1,6 @@
 <template>
   <v-carousel height="300px" 
-    :cycle="false" hide-delimiters>
+    :cycle="true" hide-delimiters>
     <v-carousel-item v-for="(group, i) in articleGroups" :key="i">
       <v-layout row align-center justify-center>
       <v-flex v-for="(article, index) in group" 

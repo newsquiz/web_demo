@@ -20,6 +20,9 @@ export default {
   },
   computed: {
     
+  },
+  mounted() {
+    document.title = `Search results for "${this.$route.query.query}"`
   }
 }
 </script>

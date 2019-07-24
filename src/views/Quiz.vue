@@ -67,7 +67,7 @@ export default {
       }).then(response => {
         const data = response.data.data
         component.article = data
-        document.title = component.article.title
+        document.title = `${component.article.title} - NewsQuiz`
         component.article.content = processContent(component.article.content)
         component.barColor = component.article.topic
       }).catch(error => {
