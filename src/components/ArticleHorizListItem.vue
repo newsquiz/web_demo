@@ -30,12 +30,6 @@
     return s.charAt(0).toUpperCase() + s.slice(1)
   }
 
-  function shorten(s, length) {
-    length = length || 20
-    if (s.length <= length) return s
-    return s.slice(0, length) + '...'
-  }
-
   export default {
     data: () => ({
     }),
