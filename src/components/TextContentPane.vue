@@ -82,7 +82,7 @@
           </p>
           
           <p class="caption">
-            Translations provided by Google Translate &reg;
+            Translations provided by Google &reg;
           </p>
         </v-card-text>
 
@@ -99,6 +99,7 @@
 
 <script>
 import axios from 'axios'
+import rg from '@/libs/range'
 
 function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.slice(1)
@@ -179,7 +180,27 @@ export default {
       })
     },
     highlightText() {
+      const userSelection = window.getSelection().getRangeAt(0)
+      const safeRanges = rg.getSafeRanges(userSelection)
+      for (var i = 0; i < safeRanges.length; i++) {
+        const range = safeRanges[i]
+        var newNode = document.createElement("mark")
+        newNode.setAttribute(
+          "style", 
+          "background-color: rgb(241, 241, 136) !important;"
+        )
+        range.surroundContents(newNode);
+      }
       this.optionMenu.show = false
+
+      // Clear selection
+      if (window.getSelection().empty) {  
+        // Chrome
+        window.getSelection().empty();
+      } else if (window.getSelection().removeAllRanges) {  
+        // Firefox
+        window.getSelection().removeAllRanges();
+      }
     },
     getSelectedText() {
       const s = window.getSelection()
@@ -199,7 +220,7 @@ export default {
           y: 0
         }
       }
-    },
+    }
   },
   computed: {
     displayLevel() {
@@ -236,10 +257,6 @@ export default {
 .article-text {
   font-size: large;
   height: 100%;
-}
-
-.heading-text {
-
 }
 
 .scroll {
