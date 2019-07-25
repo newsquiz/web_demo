@@ -54,10 +54,17 @@
           </v-list-tile-title>
         </v-list-tile>
 
-        <v-list-tile @click="highlightText">
+        <v-list-tile @click="highlightText" v-if="!selected.highlighted">
           <v-list-tile-title>
             <v-icon small>mdi-marker</v-icon>
             Highlight
+          </v-list-tile-title>
+        </v-list-tile>
+
+        <v-list-tile @click="unHighlightText" v-else>
+          <v-list-tile-title>
+            <v-icon small>mdi-marker-cancel</v-icon>
+            Remove highlight
           </v-list-tile-title>
         </v-list-tile>
       </v-list>
@@ -119,7 +126,8 @@ export default {
     return {
       selected: {
         text: '',
-        x: 0, y: 0
+        x: 0, y: 0,
+        highlighted: false
       },
       optionMenu: {
         show: false,
@@ -184,7 +192,7 @@ export default {
       const safeRanges = rg.getSafeRanges(userSelection)
       for (var i = 0; i < safeRanges.length; i++) {
         const range = safeRanges[i]
-        var newNode = document.createElement("mark")
+        var newNode = document.createElement("span")
         newNode.setAttribute(
           "style", 
           "background-color: rgb(241, 241, 136) !important;"
@@ -193,24 +201,36 @@ export default {
       }
       this.optionMenu.show = false
 
-      // Clear selection
-      if (window.getSelection().empty) {  
-        // Chrome
-        window.getSelection().empty();
-      } else if (window.getSelection().removeAllRanges) {  
-        // Firefox
-        window.getSelection().removeAllRanges();
+      rg.clearSelection()
+    },
+    unHighlightText() {
+      const userSelection = window.getSelection().getRangeAt(0)
+      const safeRanges = rg.getSafeRanges(userSelection)
+      for (var i = 0; i < safeRanges.length; i++) {
+        const range = safeRanges[i]
+        var el = range.startContainer.parentNode
+        if (el.nodeName === 'SPAN') {
+          el.setAttribute(
+            'style',
+            ''
+          )
+        }
       }
+      this.optionMenu.show = false
+
+      rg.clearSelection()
     },
     getSelectedText() {
       const s = window.getSelection()
       const text = s.toString()
+      // console.log(s.getRangeAt(0))
       try {
         const rect = s.getRangeAt(0).getBoundingClientRect()
         return {
           text: text,
           x: rect.x + 25,
-          y: rect.y + rect.height + 5
+          y: rect.y + rect.height + 5,
+          highlighted: rg.checkHighlightedRange(s.getRangeAt(0))
         }
       } catch (error) {
         console.log(error)

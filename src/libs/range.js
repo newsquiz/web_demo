@@ -59,5 +59,32 @@ export default {
     var response = rs.concat(re);    
 
     return response;
+  },
+  checkHighlightedRange(range, styleIdentifier) {
+    styleIdentifier = styleIdentifier || 'background-color: rgb(241, 241, 136)'
+    const ranges = this.getSafeRanges(range)
+    for (var i=0; i<ranges.length; i++) {
+        const sr = ranges[i]
+        // console.log(sr.startContainer)
+        var el = sr.startContainer.parentNode
+        // console.log(el)
+        if (el.nodeName === 'SPAN') {
+            const stlStr = el.getAttribute('style') || ''
+            if (stlStr.includes(styleIdentifier)) {
+                return true
+            }
+        }
+    }
+    return false
+  },
+  clearSelection() {
+    // Clear selection
+    if (window.getSelection().empty) {  
+    // Chrome
+    window.getSelection().empty();
+    } else if (window.getSelection().removeAllRanges) {  
+    // Firefox
+    window.getSelection().removeAllRanges();
+    }
   }
 }
