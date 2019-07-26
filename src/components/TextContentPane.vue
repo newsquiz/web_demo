@@ -40,12 +40,6 @@
       :close-on-click="false"
       :close-on-content-click="false">
       <v-list v-if="!optionMenu.translation.show">
-        <v-list-tile @click="optionMenu.show = false">
-          <v-list-tile-title>
-            <v-icon>mdi-arrow-left</v-icon>
-          </v-list-tile-title>
-        </v-list-tile>
-
         <v-list-tile v-if="selected.text.length <= 200"
           @click="translateText(selected.text)">
           <v-list-tile-title>
@@ -67,6 +61,13 @@
             Remove highlight
           </v-list-tile-title>
         </v-list-tile>
+        
+        <!-- <v-list-tile @click="optionMenu.show = false">
+          <v-list-tile-title>
+            <v-icon>mdi-arrow-left</v-icon>
+            <span>Close</span>
+          </v-list-tile-title>
+        </v-list-tile> -->
       </v-list>
 
       <v-card v-else max-width="300px">

@@ -32,10 +32,11 @@ export default {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
         case 'sm':
+          return 1
         case 'md':
         case 'lg':
         case 'xl':
-          return 1
+          return 2
       }
     },
     currentArticles() {
