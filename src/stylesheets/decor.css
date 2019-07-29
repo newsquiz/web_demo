@@ -41,22 +41,26 @@
     border-top: solid 3px #424242;
 }
 
+.sidelist-item {
+    border-right: solid 5px #424242;
+}
+
 .card-technology {
-    border-top-color: #01579b !important;
+    border-color: #01579b !important;
 }
 
 .card-society {
-    border-top-color: #ff6f00 !important;
+    border-color: #ff6f00 !important;
 }
 
 .card-health {
-    border-top-color: #e91e63 !important;
+    border-color: #e91e63 !important;
 }
 
 .card-sport {
-    border-top-color: #087f23 !important;
+    border-color: #087f23 !important;
 }
 
 .card-business {
-    border-top-color: #9c27b0 !important;
+    border-color: #9c27b0 !important;
 }

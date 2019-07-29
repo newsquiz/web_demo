@@ -1,7 +1,10 @@
 <template>
   <div>
     <!-- Toolbar -->
-    <v-toolbar app :color="barColor" flat dark>
+    <v-toolbar app :color="barColor" dark
+      scroll-off-screen>
+      <v-toolbar-side-icon v-if="smallScreen"
+        @click="drawer.show = !drawer.show"></v-toolbar-side-icon>
       <v-toolbar-title id="app-text">
 				<a href="/">{{ title }}</a>
 			</v-toolbar-title>
@@ -9,6 +12,34 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
+        <v-menu offset-y left>
+          <template v-slot:activator="{ on }">
+            <v-btn flat icon v-if="!smallScreen"
+              id="topics-btn"
+              v-on="on">
+              <v-icon>mdi-apps</v-icon>
+              <!-- <span>Topics</span> -->
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-subheader>Topics</v-subheader>
+            <topics-pane></topics-pane>
+          </v-list>
+        </v-menu>
+          
+        <v-btn flat icon v-if="!smallScreen"
+          to="/my-content">
+          <v-icon>mdi-wunderlist</v-icon>
+          <!-- <span>My Content</span> -->
+        </v-btn>
+
+        <v-btn flat icon v-if="!smallScreen"
+          @click="showSearch">
+          <v-icon>mdi-magnify</v-icon>
+          <!-- <span>Search</span> -->
+        </v-btn>
+
         <v-btn icon ripple>
           <v-avatar size="40">
             <img :src="user.imageUrl" alt="">
@@ -17,47 +48,45 @@
       </v-toolbar-items>
     </v-toolbar>
 
+    <!-- Nav drawer -->
+    <v-navigation-drawer v-model="drawer.show"
+      app v-if="smallScreen">
+      <v-list>
+        <v-list-group prepend-icon="mdi-apps">
+          <template v-slot:activator>
+            <v-list-tile>
+              <v-list-tile-content>
+                Topics
+              </v-list-tile-content>
+            </v-list-tile>
+          </template>
+          <topics-pane></topics-pane>
+        </v-list-group>
+        
+        <v-list-tile to="/my-content">
+          <v-list-tile-action>
+            <v-icon>mdi-wunderlist</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            My Content
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile @click="showSearch">
+          <v-list-tile-action>
+            <v-icon>mdi-magnify</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            Search
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+
     <!-- Slot content -->
     <v-content>
       <slot></slot>
     </v-content>
-    
-    <!-- Bottom nav -->
-    <v-bottom-nav app
-      color="white"
-      :active.sync="navLocation_"
-      :value="true"
-      class="bottom-nav"
-      v-if="showNav">
-
-      <v-btn flat value="home" 
-        shift :color="accentColor"
-        to="/" large>
-        <span>Home</span>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-      <v-btn flat value="topics" 
-        shift :color="accentColor"
-        id="topics-btn" large
-        @click="topicsMenu.show = true">
-        <span>Topics</span>
-        <v-icon>mdi-apps</v-icon>
-      </v-btn>
-      
-      <v-btn flat value="my-content" 
-        shift :color="accentColor"
-        to="/my-content" large>
-        <span>My Content</span>
-        <v-icon>mdi-wunderlist</v-icon>
-      </v-btn>
-
-      <v-btn flat value="search" 
-        shift :color="accentColor"
-        @click="showSearch" large>
-        <span>Search</span>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-    </v-bottom-nav>
     
     <!-- Search sheet -->
     <v-bottom-sheet v-model="search.show"
@@ -88,32 +117,6 @@
         </v-expansion-panel>
       </v-card>
     </v-bottom-sheet>
-
-    <!-- Topics menu -->
-    <v-dialog
-      attach="body"
-      scrollable
-      v-model="topicsMenu.show"
-      lazy>
-      <v-card height="70vh">
-        <v-card-title>
-          <v-spacer></v-spacer>
-          <span class="menu-header-text">Choose a topic</span>
-          <v-spacer></v-spacer>
-        </v-card-title>
-        <v-card-text style="margin-top: -10px">
-          <topics-pane></topics-pane>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn @click="topicsMenu.show = false"
-            round color="error">
-            Close
-          </v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </div>
 </template>
 
@@ -156,6 +159,9 @@ export default {
       navLocation_: '',
       topicsMenu: {
         show: false
+      },
+      drawer: {
+        show: false
       }
     }
   },
@@ -165,6 +171,17 @@ export default {
     },
     searchShowed() {
       return this.search.show
+    },
+    smallScreen() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+        case 'sm':
+          return true
+        case 'md':
+        case 'lg':
+        case 'xl':
+          return false
+      }
     }
   },
   watch: {
@@ -181,6 +198,7 @@ export default {
     showSearch() {
       this.search.prevNav = this.navLocation
       this.search.show = true
+      this.drawer.show = false
 
       const component = this
       setTimeout( () => {

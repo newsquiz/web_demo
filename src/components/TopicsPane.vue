@@ -1,33 +1,13 @@
 <template>
-  <v-container grid-list-xl>
-    <v-layout row wrap>
-      <v-flex v-for="topic in tiledTopics"      
-        :key="topic.value"
-        xs12 sm6>
-
-        <v-hover>
-          <v-card slot-scope="{ hover }"
-            :img="topic.tile.background" dark
-            height="300px" ripple tile
-            :href="`/topics/${topic.value}`">
-            <v-scale-transition>
-              <v-container fill-height 
-                :class="`overlay card-item card-${topic.value}`" 
-                v-if="hover || alwaysShowLabels">
-                <v-layout align-end justify-end row fill-height wrap>
-                  <v-flex xs12 class="text-xs-right">
-                    <span class="topic-text">
-                      <span>{{ topic.name }}</span>
-                    </span>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-scale-transition>
-          </v-card>
-        </v-hover>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div>
+    <v-list-tile v-for="topic in topics" :key="topic.value"
+      :href="`/topics/${topic.value}`"
+      :class="`sidelist-item card-${topic.value}`">
+      <v-list-tile-content>
+        <span>{{ topic.name }}</span>
+      </v-list-tile-content>
+    </v-list-tile>
+  </div>
 </template>
 
 <script>
