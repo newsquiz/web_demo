@@ -62,7 +62,7 @@ export default {
       this.loading = true
       return axios.get(url, {
         headers: {
-          'User-Id': '1'
+          'User-Id': this.$store.state.user.id
         }
       }).then(response => {
         const data = response.data.data

@@ -88,7 +88,11 @@ export default {
       this.all.loading = true
       if (this.featured.length < 1) this.featured.loading = true
 
-      return axios.get(url).then(response => {
+      return axios.get(url, {
+        headers: {
+          'User-Id': this.$store.state.user.id
+        }
+      }).then(response => {
         var data = response.data.data
         var i = 0
         if (component.featured.articles.length < 1) {

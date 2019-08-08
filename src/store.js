@@ -10,7 +10,8 @@ export default new Vuex.Store({
       imageUrl: 'https://previews.123rf.com/images/nomadsoul1/nomadsoul11402/nomadsoul1140200090/25932879-man-making-faces-square-shot.jpg',
       stats: {
         articlesToday: 5
-      }
+      },
+      id: null
     },
     finished: false,
     topics: [
@@ -59,6 +60,9 @@ export default new Vuex.Store({
   mutations: {
     setFinished(state, value) {
       state.finished = value
+    },
+    setUserId(state, userId) {
+      state.user.id = userId
     }
   },
   actions: {

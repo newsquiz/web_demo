@@ -179,7 +179,11 @@ export default {
         format: 'text'
       }
 
-      axios.post(url, payload).then(response => {
+      axios.post(url, payload, {
+        headers: {
+          'User-Id': this.$store.state.user.id
+        }
+      }).then(response => {
         const data = response.data.data
         component.optionMenu.translation.content = data.translations[0].translatedText
       }).catch(error => {
