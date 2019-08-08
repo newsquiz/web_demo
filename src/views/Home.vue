@@ -133,6 +133,9 @@ export default {
   },
   mounted() {
     const component = this
+    if (!this.$store.state.user.id) {
+      this.$router.push('/login')
+    }
 
     document.title = 'NewsQuiz'
     Promise.all([
