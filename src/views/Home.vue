@@ -100,7 +100,11 @@ export default {
       const url = `${process.env.VUE_APP_API_URL}/api/new/articles?start=${offset}&max_count=${this.latest.itemsPerPage}`
 
       this.latest.loading = true
-      return axios.get(url).then(response => {
+      return axios.get(url, {
+        headers: {
+          'User-Id': this.$store.state.user.id
+        }
+      }).then(response => {
         var data = response.data.data
         for (var i=0; i<data.length; i++) {
           component.latest.articles.push(data[i])
@@ -118,7 +122,11 @@ export default {
       const url = `${process.env.VUE_APP_API_URL}/api/technology/articles?start=${offset}&max_count=${this.recommended.itemsPerPage}`
 
       this.recommended.loading = true
-      return axios.get(url).then(response => {
+      return axios.get(url, {
+        headers: {
+          'User-Id': this.$store.state.user.id
+        }
+      }).then(response => {
         var data = response.data.data
         for (var i=0; i<data.length; i++) {
           component.recommended.articles.push(data[i])
