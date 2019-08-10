@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueCookies from 'vue-cookies'
 
 Vue.use(Vuex)
 
@@ -8,10 +9,7 @@ export default new Vuex.Store({
     user: {
       name: 'John Doe',
       imageUrl: 'https://previews.123rf.com/images/nomadsoul1/nomadsoul11402/nomadsoul1140200090/25932879-man-making-faces-square-shot.jpg',
-      stats: {
-        articlesToday: 5
-      },
-      id: null
+      id: VueCookies.get('user-id')
     },
     finished: false,
     topics: [

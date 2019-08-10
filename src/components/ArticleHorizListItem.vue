@@ -26,9 +26,7 @@
 
 
 <script>
-  function capitalize(s) {
-    return s.charAt(0).toUpperCase() + s.slice(1)
-  }
+  import { capitalize } from '@/libs/utils'
 
   export default {
     data: () => ({
@@ -85,10 +83,6 @@
 </script>
 
 <style scoped>
-.capitalize:first-letter { 
-  text-transform: uppercase; 
-}
-
 .subtitle-text {
   font-size: small;
 }

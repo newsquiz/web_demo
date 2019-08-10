@@ -1,6 +1,7 @@
 import '@babel/polyfill'
 import Vue from 'vue'
 import VueScrollTo from 'vue-scrollto'
+import VueCookies from 'vue-cookies'
 import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
@@ -23,6 +24,9 @@ Vue.use(VueScrollTo, {
   x: false,
   y: true
 })
+
+Vue.use(VueCookies)
+VueCookies.config('30d')
 
 Vue.config.productionTip = false
 

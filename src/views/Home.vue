@@ -8,12 +8,9 @@
             <p class="welcome-text">
               {{ welcomeMessage }}
             </p>
-            <p v-if="user">
-              {{ `You've completed ${user.stats.articlesToday} articles today.` }}
-            </p>
             
             <h1 class="bottom-pad headline">
-              Recommended for you
+              Featured articles
             </h1>
             <article-horiz-list v-if="!recommended.loading"
               :articles="recommended.articles"></article-horiz-list>

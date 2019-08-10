@@ -47,11 +47,8 @@
 
 
 <script>
+import { capitalize } from '@/libs/utils'
 import GradientPane from '@/components/GradientPane'
-
-function capitalize(s) {
-  return s.charAt(0).toUpperCase() + s.slice(1)
-}
 
 function shorten(s, length) {
   length = length || 20
@@ -120,10 +117,6 @@ export default {
 </script>
 
 <style scoped>
-.capitalize:first-letter { 
-  text-transform: uppercase; 
-}
-
 .subtitle-text {
   font-size: small;
 }

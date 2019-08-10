@@ -1,7 +1,7 @@
 <template>
   <div>
     <span><b>
-      {{ `${index}. ${question.content}` }}
+      {{ `${index}. ${displayContent}` }}
     </b></span>
     <v-radio-group v-model="question.userAnswer"
       :success-messages="correctStr"
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { capitalize } from '@/libs/utils'
+
 export default {
   data() {
     return {
@@ -28,6 +30,9 @@ export default {
     showResult: Boolean
   },
   computed: {
+    displayContent() {
+      return capitalize(this.question.content)
+    },
     isCorrect() {
       return this.question.answer === this.question.userAnswer
     },

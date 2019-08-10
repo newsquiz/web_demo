@@ -53,6 +53,7 @@ export default {
       return axios.post(url, payload).then(response => {
         const data = response.data.data
         component.$store.commit('setUserId', data.id)
+        component.$cookies.set('user-id', data.id)
         component.$router.push('/')        
       }).catch(error => {
         alert(error.message)

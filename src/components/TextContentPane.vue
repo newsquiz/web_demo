@@ -106,12 +106,9 @@
 </template>
 
 <script>
+import { capitalize } from '@/libs/utils'
 import axios from 'axios'
 import rg from '@/libs/range'
-
-function capitalize(s) {
-  return s.charAt(0).toUpperCase() + s.slice(1)
-}
 
 function shorten(s, length) {
   length = length || 40

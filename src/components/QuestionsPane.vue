@@ -11,12 +11,14 @@
       <span class="header-text">Questions</span>
     </v-card-text>
 
-    <v-card-text v-for="(qst, index) in questions" :key="qst.id"
+    <v-card-text v-for="(qst, index) in questions" :key="qst._id"
       class="demargin">
-      <fill-question-item v-if="qst.type == 'fill'"
+      <fill-question-item v-if="qst.type == 'Short-Answer-Question' || qst.type == 'Fullfill'"
         :index="index + 1" :question="qst" :showResult="showResult"></fill-question-item>
-      <choice-question-item v-else-if="qst.type == 'choice'"
+      <choice-question-item v-else-if="qst.type == 'Multi-Choice-Question' || qst.type =='Fullfill-MultiChoice'"
         :index="index + 1" :question="qst" :showResult="showResult"></choice-question-item>
+      <yes-no-question-item v-else-if="qst.type == 'Yes-No-Question'"
+        :index="index + 1" :question="qst" :showResult="showResult"></yes-no-question-item>
     </v-card-text>
 
     <v-card-actions class="btn-bar">
@@ -44,11 +46,13 @@
 <script>
 import FillQuestionItem from '@/components/FillQuestionItem'
 import ChoiceQuestionItem from '@/components/ChoiceQuestionItem'
+import YesNoQuestionItem from '@/components/YesNoQuestionItem'
 import ScoreCard from '@/components/ScoreCard'
 
 export default {
   components: {
-    FillQuestionItem, ChoiceQuestionItem, ScoreCard
+    FillQuestionItem, ChoiceQuestionItem, ScoreCard,
+    YesNoQuestionItem
   },
   data() {
     return {
