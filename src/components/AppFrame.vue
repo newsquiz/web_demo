@@ -47,17 +47,6 @@
     <v-navigation-drawer v-model="drawer.show"
       app v-if="smallScreen">
       <v-list>
-        <v-list-group prepend-icon="mdi-apps">
-          <template v-slot:activator>
-            <v-list-tile>
-              <v-list-tile-content>
-                Topics
-              </v-list-tile-content>
-            </v-list-tile>
-          </template>
-          <topics-pane></topics-pane>
-        </v-list-group>
-        
         <v-list-tile to="/my-content">
           <v-list-tile-action>
             <v-icon>mdi-wunderlist</v-icon>

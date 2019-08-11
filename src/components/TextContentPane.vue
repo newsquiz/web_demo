@@ -167,17 +167,11 @@ export default {
         format: 'text'
       }
 
-      var headers = {}
-      if (this.$store.state.user.id) {
-        headers['User-Id'] = this.$store.state.user.id
-      }
-      axios.post(url, payload, {
-        headers: headers
-      }).then(response => {
+      axios.post(url, payload).then(response => {
         const data = response.data.data
         component.optionMenu.translation.content = data.translations[0].translatedText
       }).catch(error => {
-        console.error(error)
+        console.log(error)
       }).finally(() => {
         component.optionMenu.translation.loading = false
       })
