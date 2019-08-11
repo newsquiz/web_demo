@@ -9,13 +9,13 @@
             class="overlay-text card-item"
             :style="`border-color: ${this.topic.color} !important;`">
             <div class="title-wrap black--text">
-              <p class="title" style="">
-              {{ shortTitle }}
-            </p>
+              <span class="title" style="">
+                {{ shortTitle }}
+              </span>
             </div>
-            <v-chip small label outline color="accent">
-              {{ displayType }}
-            </v-chip>
+            <div>
+              <v-icon light>{{ displayIcon }}</v-icon>
+            </div>
           </v-flex>
         </v-layout>
       </v-img>
@@ -52,10 +52,19 @@
         return formatted_date
       },
       thumbnailUrl() {
+        if (!this.article.thumbnail) return ''
         if (this.article.thumbnail.startsWith('http')) {
           return this.article.thumbnail
         }
         return `http://${this.article.thumbnail}`
+      },
+      displayIcon() {
+        switch (this.article.type) {
+          case 'text':
+            return 'mdi-clipboard-text-outline'
+          case 'audio':
+            return 'mdi-headphones'
+        }
       },
       displayType() {
         return capitalize(this.article.type)

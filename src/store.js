@@ -48,7 +48,7 @@ export default new Vuex.Store({
         color: '#bf360c'
       },
       {
-        name: 'Urbanist Hanoi',
+        name: 'Hanoi',
         value: 'urbanisthanoi-news',
         color: '#6d4c41'
       }

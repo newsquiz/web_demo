@@ -69,7 +69,6 @@ export default {
         headers: headers
       }).then(response => {
         const data = response.data.data
-        console.log(data)
         component.article = data
         document.title = `${component.article.title} - NewsQuiz`
         component.article.content = processContent(component.article.content)

@@ -20,7 +20,9 @@
         :style="`border-color: ${this.topic.color} !important;`">
         <v-card-title>
           <div>
-            <h2 class="headline">{{ article.title }}</h2>
+            <div class="headline">
+              <span>{{ article.title }}</span>
+            </div>
             <span class="subtitle-text">
               Published on <span>{{displayDate}}</span> by 
               <a :href="article.source_url" target="_blank">
@@ -29,14 +31,10 @@
             </span>
           </div>
         </v-card-title>
-
-        <v-card-actions style="margin-top: -5px">
-          <v-chip small label outline color="accent">
-            {{ displayType }}
-          </v-chip>
-        </v-card-actions>
+        <v-card-text style="margin-top: -20px">
+          <v-icon>{{ displayIcon }}</v-icon>
+        </v-card-text>
       </v-flex>
-
     </v-layout>
     
     
@@ -98,12 +96,21 @@ export default {
           return ''
       }
     },
+    displayIcon() {
+      switch (this.article.type) {
+        case 'text':
+          return 'mdi-clipboard-text-outline'
+        case 'audio':
+          return 'mdi-headphones'
+      }
+    },
     displayDate: function() {
       let current_datetime = new Date(Date.parse(this.article.created_time));
       let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
       return formatted_date
     },
     thumbnailUrl() {
+      if (!this.article.thumbnail) return ''
       if (this.article.thumbnail.startsWith('http')) {
         return this.article.thumbnail
       }

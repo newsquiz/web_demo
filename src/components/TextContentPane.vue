@@ -17,7 +17,7 @@
       <slot name="subheader"></slot>
 
       <v-card-text v-if="showContent">
-        <div v-html="article.content_raw" 
+        <div v-html="article.content_raw || article.content" 
           class="article-text"
           @mouseup.stop="onHighlight"></div>
       </v-card-text>

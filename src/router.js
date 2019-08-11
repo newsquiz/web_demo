@@ -24,11 +24,6 @@ export default new Router({
       component: () => import('./views/Signup.vue')
     },
     {
-      path: '/topics',
-      name: 'topics',
-      component: () => import('./views/Topics.vue')
-    },
-    {
       path: '/topics/:topic',
       name: 'topic-view',
       component: () => import('./views/TopicView.vue')

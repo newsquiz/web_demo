@@ -30,6 +30,17 @@
           </v-avatar>
         </v-btn>
       </v-toolbar-items>
+
+      <template v-slot:extension v-if="showNav">
+        <v-tabs :color="barColor" hide-slider active-class=""
+          show-arrows>
+          <v-btn v-for="topic in topics" :key="topic.value"
+            :href="`/topics/${topic.value}`"
+            round flat color="">
+            {{ topic.name }}
+          </v-btn>
+        </v-tabs>
+      </template>
     </v-toolbar>
 
     <!-- Nav drawer -->
@@ -150,6 +161,9 @@ export default {
   computed: {
     user() {
       return this.$store.state.user
+    },
+    topics() {
+      return this.$store.state.topics
     },
     searchShowed() {
       return this.search.show
