@@ -32,7 +32,7 @@ export default {
       return capitalize(this.question.content)
     },
     isCorrect() {
-      return this.question.answer === this.question.userAnswer
+      return this.question.correct
     },
     correctStr() {
       if (this.showResult && this.isCorrect) {

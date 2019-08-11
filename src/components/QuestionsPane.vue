@@ -23,27 +23,29 @@
 
     <v-card-actions class="btn-bar">
       <v-spacer></v-spacer>
-      <v-btn color="error" round
+      <!-- <v-btn color="error" round
         @click="abort"
         v-if="!finished">
         Back to home
-      </v-btn>
+      </v-btn> -->
       <v-btn color="success" round
         @click="submitAnswers"
         v-if="!finished">
         Submit
       </v-btn>
-      <v-btn v-if="finished"
+      <!-- <v-btn v-if="finished"
         color="info" round
         @click="abort">
         Back to home
-      </v-btn>
+      </v-btn> -->
       <v-spacer></v-spacer>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import axios from 'axios'
+
 import FillQuestionItem from '@/components/FillQuestionItem'
 import ChoiceQuestionItem from '@/components/ChoiceQuestionItem'
 import YesNoQuestionItem from '@/components/YesNoQuestionItem'
@@ -67,7 +69,7 @@ export default {
       return this.questions.length
     },
     correctQuestions() {
-      return this.questions.filter(x => x.userAnswer === x.answer, this.questions)
+      return this.questions.filter(x => x.correct)
     },
     totalCorrectQuestions() {
       return this.correctQuestions.length
@@ -82,6 +84,34 @@ export default {
   },
   methods: {
     submitAnswers() {
+      const component = this
+      const url = `${process.env.VUE_APP_API_URL}/api/user_answers`
+      const qids = this.questions.map(x => x.id)
+      const answers = this.questions.map(x => x.userAnswer || '')
+      const payload = {
+        questions: qids,
+        answers: answers
+      }
+
+      var headers = {}
+      if (this.$store.state.user.id) {
+        headers['User-Id'] = this.$store.state.user.id
+      }
+      return axios.post(url, payload, {
+        headers: headers
+      }).then(response => {
+        const data = response.data.data
+        for (var i=0; i<data.results.length; i++) {
+          component.questions[i].correct = data.results[i]
+          component.questions[i].explain = data.explains[i]
+          component.questions[i].answer = data.answers[i] 
+        }
+        component.onResultReady()
+      }).catch(error => {
+        alert(error.message)
+      })
+    },
+    onResultReady() {
       this.showResult = true
       this.$store.commit('setFinished', true)
       this.$scrollTo('#pane-top', 500, {

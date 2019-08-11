@@ -8,8 +8,7 @@
       :error-messages="incorrectStr"
       :readonly="showResult" :row="useRow">
       <v-radio v-for="opt in question.options" :key="opt"
-      xs12 md6
-        :label="opt" :value="opt">
+        xs12 md6 :label="opt" :value="opt">
       </v-radio> 
     </v-radio-group>
   </div>
@@ -34,7 +33,7 @@ export default {
       return capitalize(this.question.content)
     },
     isCorrect() {
-      return this.question.answer === this.question.userAnswer
+      return this.question.correct
     },
     correctStr() {
       if (this.showResult && this.isCorrect) {
