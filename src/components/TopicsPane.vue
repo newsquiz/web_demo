@@ -1,8 +1,9 @@
 <template>
+  
   <div>
     <v-list-tile v-for="topic in topics" :key="topic.value"
       :href="`/topics/${topic.value}`"
-      :class="`sidelist-item card-${topic.value}`">
+      class="sidelist-item">
       <v-list-tile-content>
         <span>{{ topic.name }}</span>
       </v-list-tile-content>
@@ -50,5 +51,9 @@ export default {
 .topic-text {
   font-size: 32pt;
   font-weight: 500;
+}
+
+.sidelist-item {
+    border-right: solid 2px #424242;
 }
 </style>

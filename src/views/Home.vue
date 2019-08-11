@@ -12,11 +12,11 @@
             <h1 class="bottom-pad headline">
               Featured articles
             </h1>
-            <article-horiz-list v-if="!recommended.loading"
-              :articles="recommended.articles"></article-horiz-list>
+            <article-horiz-list v-if="!featured.loading"
+              :articles="featured.articles"></article-horiz-list>
             <div class="text-xs-center bottom-pad">
               <v-progress-circular indeterminate
-              v-if="recommended.loading"
+              v-if="featured.loading"
               size="64"></v-progress-circular>
             </div>
               
@@ -51,7 +51,7 @@ export default {
   },
   data() {
     return {
-      recommended: {
+      featured: {
         articles: [],
         loading: false,
         itemsPerPage: 6
@@ -59,8 +59,8 @@ export default {
       latest: {
         articles: [],
         loading: false,
-        itemsPerPage: 12
       },
+      itemsPerPage: 12
     }
   },
   computed: {
@@ -93,59 +93,44 @@ export default {
   methods: {
     loadNew() {
       const component = this
-      const offset = this.latest.articles.length
-      const url = `${process.env.VUE_APP_API_URL}/api/new/articles?start=${offset}&max_count=${this.latest.itemsPerPage}`
+      const offset = this.featured.articles.length + this.latest.articles.length
+      const maxCount = this.itemsPerPage
+      const url = `${process.env.VUE_APP_API_URL}/api/new/articles?start=${offset}&max_count=${maxCount}`
 
       this.latest.loading = true
+      if (this.featured.length < 1) this.featured.loading = true
+
+      var headers = {}
+      if (this.$store.state.user.id) {
+        headers['User-Id'] = this.$store.state.user.id
+      }
       return axios.get(url, {
-        headers: {
-          'User-Id': this.$store.state.user.id
-        }
+        headers: headers
       }).then(response => {
         var data = response.data.data
-        for (var i=0; i<data.length; i++) {
+        var i = 0
+        if (component.featured.articles.length < 1) {
+          const pushItems = Math.min(component.featured.itemsPerPage, data.length)
+          for (; i<pushItems; i++) {
+            component.featured.articles.push(data[i])
+          }
+        }
+        for (; i<data.length; i++) {
           component.latest.articles.push(data[i])
         }
-        component.latest.page += 1
       }).catch(error => {
         console.log(error)
       }).finally(() => {
         component.latest.loading = false
-      })
-    },
-    loadRecommended() {
-      const component = this
-      const offset = this.recommended.articles.length
-      const url = `${process.env.VUE_APP_API_URL}/api/technology/articles?start=${offset}&max_count=${this.recommended.itemsPerPage}`
-
-      this.recommended.loading = true
-      return axios.get(url, {
-        headers: {
-          'User-Id': this.$store.state.user.id
-        }
-      }).then(response => {
-        var data = response.data.data
-        for (var i=0; i<data.length; i++) {
-          component.recommended.articles.push(data[i])
-        }
-        component.recommended.page += 1
-      }).catch(error => {
-        console.log(error)
-      }).finally(() => {
-        component.recommended.loading = false
+        component.featured.loading = false
       })
     }
   },
   mounted() {
     const component = this
-    if (!this.$store.state.user.id) {
-      this.$router.push('/login')
-    }
 
     document.title = 'NewsQuiz'
-    Promise.all([
-      this.loadNew(), this.loadRecommended()
-    ]).then(() => {
+    this.loadNew().then(() => {
       window.onscroll = () => {
         if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
           component.loadNew()        

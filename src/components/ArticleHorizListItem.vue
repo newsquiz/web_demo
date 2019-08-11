@@ -3,10 +3,11 @@
     :href="'/quiz/' + article.id" height="100%">
     <v-img
       height="300px"
-      :src="article.thumbnail">
+      :src="thumbnailUrl">
         <v-layout align-end justify-end row fill-height wrap>
           <v-flex xs12
-            :class="`overlay-text card-item card-${article.topic}`">
+            class="overlay-text card-item"
+            :style="`border-color: ${this.topic.color} !important;`">
             <div class="title-wrap black--text">
               <p class="title" style="">
               {{ shortTitle }}
@@ -14,9 +15,6 @@
             </div>
             <v-chip small label outline color="accent">
               {{ displayType }}
-            </v-chip>
-            <v-chip small label dark :color="levelColor">
-              {{ displayLevel }}
             </v-chip>
           </v-flex>
         </v-layout>
@@ -29,8 +27,11 @@
   import { capitalize } from '@/libs/utils'
 
   export default {
-    data: () => ({
-    }),
+    data() {
+      return {
+        topic: {}
+      }
+    },
     props: {
       article: {
         default: {
@@ -45,31 +46,16 @@
       }
     },
     computed: {
-      levelColor() {
-        switch (this.article.level) {
-          case 'easy':
-            return 'green'
-          case 'medium':
-            return '#ffb300'
-          case 'hard':
-            return 'red'
-          default:
-            return ''
-        }
-      },
       displayDate: function() {
         let current_datetime = new Date(Date.parse(this.article.created_time));
         let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
         return formatted_date
       },
-      displayLevel() {
-        return capitalize(this.article.level)
-      },
       thumbnailUrl() {
         if (this.article.thumbnail.startsWith('http')) {
           return this.article.thumbnail
         }
-        return `${process.env.VUE_APP_API_URL}${this.article.thumbnail}`
+        return `http://${this.article.thumbnail}`
       },
       displayType() {
         return capitalize(this.article.type)
@@ -77,6 +63,16 @@
       shortTitle() {
         // return shorten(this.article.title, 40)
         return this.article.title
+      }
+    },
+    mounted() {
+      const topics = this.$store.state.topics
+      for (var i=0; i<topics.length; i++) {
+        const topic = topics[i]
+        if (topic.value === this.article.topic) {
+          this.topic = topic
+          break
+        }
       }
     }
   }
@@ -103,5 +99,9 @@
 
 .blurred {
   opacity: 0.6;
+}
+
+.card-item {
+  border-top: solid 3px #424242;
 }
 </style>

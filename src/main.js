@@ -9,7 +9,6 @@ import store from './store'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import 'typeface-comfortaa'
 import '@mdi/font/css/materialdesignicons.css'
-import '@/stylesheets/decor.css'
 
 Vue.use(VueScrollTo, {
   container: "body",

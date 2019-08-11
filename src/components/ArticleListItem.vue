@@ -3,7 +3,7 @@
     >
     <v-layout row wrap>
       <v-flex xs12 sm4 lg3>
-        <v-img :src="article.thumbnail"
+        <v-img :src="thumbnailUrl"
           height="150px">
           <v-layout align-center justify-center row fill-height>
             <v-flex xs12 v-if="article.type === 'audio'">
@@ -16,7 +16,8 @@
           </v-layout>
         </v-img>
       </v-flex>
-      <v-flex xs12 sm8 lg9 :class="`card-item card-${article.topic}`">
+      <v-flex xs12 sm8 lg9 class="card-item"
+        :style="`border-color: ${this.topic.color} !important;`">
         <v-card-title>
           <div>
             <h2 class="headline">{{ article.title }}</h2>
@@ -33,9 +34,6 @@
           <v-chip small label outline color="accent">
             {{ displayType }}
           </v-chip>
-          <v-chip small label dark :color="levelColor">
-            {{ displayLevel }}
-          </v-chip>
         </v-card-actions>
       </v-flex>
 
@@ -48,7 +46,6 @@
 
 <script>
 import { capitalize } from '@/libs/utils'
-import GradientPane from '@/components/GradientPane'
 
 function shorten(s, length) {
   length = length || 20
@@ -58,14 +55,23 @@ function shorten(s, length) {
 
 export default {
   components: {
-    GradientPane
-  },
-  mounted() {
     
   },
-  data: () => ({
-
-  }),
+  mounted() {
+    const topics = this.$store.state.topics
+    for (var i=0; i<topics.length; i++) {
+      const topic = topics[i]
+      if (topic.value === this.article.topic) {
+        this.topic = topic
+        break
+      }
+    }
+  },
+  data() {
+    return {
+      topic: {}
+    }
+  },
   props: {
     article: {
       default: {
@@ -97,14 +103,11 @@ export default {
       let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
       return formatted_date
     },
-    displayLevel() {
-      return capitalize(this.article.level)
-    },
     thumbnailUrl() {
       if (this.article.thumbnail.startsWith('http')) {
         return this.article.thumbnail
       }
-      return `${process.env.VUE_APP_API_URL}${this.article.thumbnail}`
+      return `http://${this.article.thumbnail}`
     },
     displayType() {
       return capitalize(this.article.type)
@@ -121,9 +124,7 @@ export default {
   font-size: small;
 }
 
-.triangle-container {
-  display: flex;
-  justify-content: flex-end;
-  height: 100%;
+.card-item {
+  border-top: solid 3px #424242;
 }
 </style>

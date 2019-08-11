@@ -11,22 +11,6 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
-        <v-menu offset-y left>
-          <template v-slot:activator="{ on }">
-            <v-btn flat icon v-if="!smallScreen"
-              id="topics-btn"
-              v-on="on">
-              <v-icon>mdi-apps</v-icon>
-              <!-- <span>Topics</span> -->
-            </v-btn>
-          </template>
-
-          <v-list>
-            <v-subheader>Topics</v-subheader>
-            <topics-pane></topics-pane>
-          </v-list>
-        </v-menu>
-          
         <v-btn flat icon v-if="!smallScreen"
           to="/my-content">
           <v-icon>mdi-wunderlist</v-icon>
@@ -41,7 +25,8 @@
 
         <v-btn icon ripple>
           <v-avatar size="40">
-            <img :src="user.imageUrl" alt="">
+            <!-- <img :src="user.imageUrl" alt=""> -->
+            <v-icon >mdi-account-circle</v-icon>
           </v-avatar>
         </v-btn>
       </v-toolbar-items>
@@ -150,12 +135,10 @@ export default {
       search: {
         show: false,
         query: '',
-        prevNav: '',
         advancedOpts: {
 
         }
       },
-      navLocation_: '',
       topicsMenu: {
         show: false
       },
@@ -184,18 +167,12 @@ export default {
     }
   },
   watch: {
-    searchShowed(newVal) {
-      if (!newVal) {
-        this.navLocation_ = this.search.prevNav
-      }
-    }
   },
   mounted() {
-    this.navLocation_ = this.navLocation
+
   },
   methods: {
     showSearch() {
-      this.search.prevNav = this.navLocation
       this.search.show = true
       this.drawer.show = false
 

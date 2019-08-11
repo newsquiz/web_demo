@@ -10,8 +10,6 @@
         
         <p class="subtitle-text">
           Published by <a :href="article.source_url">{{ article.publisher }}</a> on <span>{{ displayDate }}</span>
-          <v-chip dark small :color="levelColor"
-            class="ml-2 mb-2">{{ displayLevel }}</v-chip>
         </p>
       </v-card-text>
       <v-divider light></v-divider>
@@ -19,7 +17,7 @@
       <slot name="subheader"></slot>
 
       <v-card-text v-if="showContent">
-        <div v-html="article.content" 
+        <div v-html="article.content_raw" 
           class="article-text"
           @mouseup.stop="onHighlight"></div>
       </v-card-text>
@@ -61,13 +59,6 @@
             Remove highlight
           </v-list-tile-title>
         </v-list-tile>
-        
-        <!-- <v-list-tile @click="optionMenu.show = false">
-          <v-list-tile-title>
-            <v-icon>mdi-arrow-left</v-icon>
-            <span>Close</span>
-          </v-list-tile-title>
-        </v-list-tile> -->
       </v-list>
 
       <v-card v-else max-width="300px">
@@ -176,10 +167,12 @@ export default {
         format: 'text'
       }
 
+      var headers = {}
+      if (this.$store.state.user.id) {
+        headers['User-Id'] = this.$store.state.user.id
+      }
       axios.post(url, payload, {
-        headers: {
-          'User-Id': this.$store.state.user.id
-        }
+        headers: headers
       }).then(response => {
         const data = response.data.data
         component.optionMenu.translation.content = data.translations[0].translatedText
@@ -245,9 +238,6 @@ export default {
     }
   },
   computed: {
-    displayLevel() {
-      return capitalize(this.article.level)
-    },
     displayType() {
       return capitalize(this.article.type)
     },
@@ -279,6 +269,16 @@ export default {
 .article-text {
   font-size: large;
   height: 100%;
+}
+
+.article-text >>> img {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.article-text >>> table {
+  width: 100% !important;
 }
 
 .scroll {

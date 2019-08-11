@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-frame :showNav="false" :barColor="barColor">
+    <app-frame :showNav="false" :barColor="topic.color">
       <v-layout row v-if="article" fill-height>
         <v-flex xs12 fill-height>
           <text-quiz v-if="article.type == 'text' && !isMobile"
@@ -22,7 +22,7 @@
 
     <v-footer app :color="'white'" dark height="64"
       v-if="article && article.type == 'audio'" style="padding: 0">
-      <audio-player :color="barColor"
+      <audio-player :color="topic.color"
         :file="audioUrl"></audio-player>
     </v-footer>
   </div>
@@ -60,16 +60,24 @@ export default {
       const id = this.$route.params.quiz_id
       var url = `${process.env.VUE_APP_API_URL}/api/articles/${id}`
       this.loading = true
+
+      var headers = {}
+      if (this.$store.state.user.id) {
+        headers['User-Id'] = this.$store.state.user.id
+      }
       return axios.get(url, {
-        headers: {
-          'User-Id': this.$store.state.user.id
-        }
+        headers: headers
       }).then(response => {
         const data = response.data.data
+        console.log(data)
         component.article = data
         document.title = `${component.article.title} - NewsQuiz`
         component.article.content = processContent(component.article.content)
-        component.barColor = component.article.topic
+        const topicName = data.topic
+        const topics = this.$store.state.topics
+        this.topic = topics.find(x => {
+          return x.value === topicName
+        })
       }).catch(error => {
         alert(error.message)
       }).finally(() => {
@@ -100,7 +108,7 @@ export default {
     return {
       article: null,
       loading: false,
-      barColor: 'primary'
+      topic: {}
     }
   }
 }

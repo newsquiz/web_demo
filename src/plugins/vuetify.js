@@ -10,12 +10,7 @@ Vue.use(Vuetify, {
     error: '#FF5252',
     info: '#2196F3',
     success: '#4CAF50',
-    warning: '#FFC107',
-    technology: '#01579b',
-    society: '#ff6f00',
-    health: '#e91e63',
-    sport: '#087f23',
-    business: '#9c27b0'
+    warning: '#FFC107'
   },
   options: {
     customProperties: true

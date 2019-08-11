@@ -8,7 +8,6 @@ export default new Vuex.Store({
   state: {
     user: {
       name: 'John Doe',
-      imageUrl: 'https://previews.123rf.com/images/nomadsoul1/nomadsoul11402/nomadsoul1140200090/25932879-man-making-faces-square-shot.jpg',
       id: VueCookies.get('user-id')
     },
     finished: false,
@@ -16,42 +15,42 @@ export default new Vuex.Store({
       {
         name: 'Technology',
         value: 'technology',
-        tile: {
-          background: '/images/technology.jpg'
-        }
+        color: '#01579b'
       },
       {
         name: 'Society',
         value: 'society',
-        tile: {
-          background: '/images/society.jpg'
-        }
+        color: '#ff6f00'
       },
       {
         name: 'Health',
         value: 'health',
-        tile: {
-          background: '/images/health.png'
-        }
+        color: '#e91e63'
       },
       {
         name: 'Sports',
-        value: 'sport',
-        tile: {
-          background: '/images/sport.jpg'
-        }
+        value: 'sports',
+        color: '#087f23'        
       },
       {
         name: 'Business',
         value: 'business',
-        tile: {
-          background: '/images/business.png'
-        }
+        color: '#9c27b0'        
       },
       {
-        name: 'Recommended',
-        groupTitle: 'Suggested articles for you',
-        value: 'recommended'
+        name: 'Lifestyle',
+        value: 'life',
+        color: '#4f9a94'
+      },
+      {
+        name: 'Travel',
+        value: 'travel',
+        color: '#bf360c'
+      },
+      {
+        name: 'Urbanist Hanoi',
+        value: 'urbanisthanoi-news',
+        color: '#6d4c41'
       }
     ]
   },

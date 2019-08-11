@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-frame v-if="topic" navLocation="topics"
-      :barColor="topic.value" :accentColor="topic.value">
+      :barColor="topic.color" :accentColor="topic.color">
       <v-container fluid fill-height>
         <v-layout fill-height row wrap>
           <v-flex xs12 md10 offset-md1 
@@ -88,10 +88,12 @@ export default {
       this.all.loading = true
       if (this.featured.length < 1) this.featured.loading = true
 
+      var headers = {}
+      if (this.$store.state.user.id) {
+        headers['User-Id'] = this.$store.state.user.id
+      }
       return axios.get(url, {
-        headers: {
-          'User-Id': this.$store.state.user.id
-        }
+        headers: headers
       }).then(response => {
         var data = response.data.data
         var i = 0
