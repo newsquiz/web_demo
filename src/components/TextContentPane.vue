@@ -25,7 +25,7 @@
       <v-layout v-else style="height: 60%"
         align-center justify-center row>
         <v-flex xs12 class="text-xs-center">
-          <v-icon size="256" style="opacity: 0.5">mdi-cancel</v-icon>
+          <v-icon size="256" style="opacity: 0.5">mdi-headphones</v-icon>
         </v-flex>
       </v-layout>
     </v-card>

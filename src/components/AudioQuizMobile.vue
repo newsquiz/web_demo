@@ -4,7 +4,7 @@
       <v-flex xs12>
         <v-tabs mandatory grow
           v-model="activeTab"
-          :color="article.topic"
+          :color="barColor"
           slider-color="white"
           dark centered>
           <v-tab v-if="finished"><v-icon>mdi-clipboard-text-outline</v-icon></v-tab>
@@ -58,7 +58,8 @@ export default {
     }
   },
   props: {
-    article: Object
+    article: Object,
+    barColor: String
   },
   computed: {
     finished() {

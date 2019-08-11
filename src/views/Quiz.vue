@@ -5,11 +5,13 @@
         <v-flex xs12 fill-height>
           <text-quiz v-if="article.type == 'text' && !isMobile"
             :article="article"></text-quiz>
-          <text-quiz-mobile v-if="article.type == 'text' && isMobile"
+          <text-quiz-mobile v-if="article.type == 'text' && isMobile" 
+            :barColor="topic.color"
             :article="article"></text-quiz-mobile>
           <audio-quiz v-else-if="article.type == 'audio' && !isMobile"
             :article="article"></audio-quiz>
           <audio-quiz-mobile v-else-if="article.type == 'audio' && isMobile"
+            :barColor="topic.color"
             :article="article"></audio-quiz-mobile>
         </v-flex>
       </v-layout>
