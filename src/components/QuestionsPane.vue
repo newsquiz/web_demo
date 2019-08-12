@@ -30,27 +30,17 @@
     <v-divider></v-divider>
     <v-card-text v-if="showResult">
       <p class="headline">Recommended articles</p>
-      <article-horiz-list
+      <article-horiz-list :itemsPerPage="1"
         :articles="nextArticles"></article-horiz-list>
     </v-card-text>
 
     <v-card-actions class="btn-bar">
       <v-spacer></v-spacer>
-      <!-- <v-btn color="error" round
-        @click="abort"
-        v-if="!finished">
-        Back to home
-      </v-btn> -->
       <v-btn color="success" round
         @click="submitAnswers"
         v-if="!finished">
         Submit
       </v-btn>
-      <!-- <v-btn v-if="finished"
-        color="info" round
-        @click="abort">
-        Back to home
-      </v-btn> -->
       <v-spacer></v-spacer>
     </v-card-actions>
   </v-card>
@@ -138,7 +128,7 @@ export default {
     },
     fetchNextArticles() {
       const component = this
-      const url = `${process.env.VUE_APP_API_URL}/api/new/articles?max_count=6`
+      const url = `${process.env.VUE_APP_API_URL}/api/recommended_articles?num_item=6`
 
       var headers = {}
       if (this.$store.state.user.id) {
