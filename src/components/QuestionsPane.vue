@@ -26,6 +26,14 @@
       </div>
     </v-card-text>
 
+    <br>
+    <v-divider></v-divider>
+    <v-card-text v-if="showResult">
+      <p class="headline">Recommended articles</p>
+      <article-horiz-list
+        :articles="nextArticles"></article-horiz-list>
+    </v-card-text>
+
     <v-card-actions class="btn-bar">
       <v-spacer></v-spacer>
       <!-- <v-btn color="error" round
@@ -51,6 +59,7 @@
 <script>
 import axios from 'axios'
 
+import ArticleHorizList from '../components/ArticleHorizList'
 import ExplanationMenu from '@/components/ExplanationMenu'
 import FillQuestionItem from '@/components/FillQuestionItem'
 import ChoiceQuestionItem from '@/components/ChoiceQuestionItem'
@@ -60,11 +69,12 @@ import ScoreCard from '@/components/ScoreCard'
 export default {
   components: {
     FillQuestionItem, ChoiceQuestionItem, ScoreCard,
-    YesNoQuestionItem, ExplanationMenu
+    YesNoQuestionItem, ExplanationMenu, ArticleHorizList
   },
   data() {
     return {
       showResult: false,
+      nextArticles: []
     }
   },
   computed: {
@@ -112,7 +122,7 @@ export default {
           component.questions[i].explain = data.explains[i]
           component.questions[i].answer = data.answers[i] 
         }
-        console.log(data.explains)
+        component.fetchNextArticles()
         component.onResultReady()
       }).catch(error => {
         alert(error.message)
@@ -124,6 +134,25 @@ export default {
       this.$scrollTo('#pane-top', 500, {
         container: '#pane',
         force: true
+      })
+    },
+    fetchNextArticles() {
+      const component = this
+      const url = `${process.env.VUE_APP_API_URL}/api/new/articles?max_count=6`
+
+      var headers = {}
+      if (this.$store.state.user.id) {
+        headers['User-Id'] = this.$store.state.user.id
+      }
+      return axios.get(url, {
+        headers: headers
+      }).then(response => {
+        const data = response.data.data
+        for (var i=0; i<data.length; i++) {
+          component.nextArticles.push(data[i])
+        }
+      }).catch(error => {
+        console.log(error)
       })
     },
     abort() {

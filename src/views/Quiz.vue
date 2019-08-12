@@ -24,7 +24,7 @@
 
     <v-footer app :color="'white'" dark height="64"
       v-if="article && article.type == 'audio'" style="padding: 0">
-      <audio-player :color="topic.color"
+      <audio-player :color="topic.color || 'primary'"
         :file="audioUrl"></audio-player>
     </v-footer>
   </div>
@@ -78,7 +78,7 @@ export default {
         const topics = this.$store.state.topics
         this.topic = topics.find(x => {
           return x.value === topicName
-        })
+        }) || {}
       }).catch(error => {
         alert(error.message)
       }).finally(() => {

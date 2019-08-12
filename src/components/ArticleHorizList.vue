@@ -7,7 +7,7 @@
         :key="article.id" xs12
         class="bottom-pad" d-flex>
           <article-horiz-list-item :article="article"
-            :style="index < itemsPerPage - 1 ? 'margin-right: 10px' : ''"/>
+            :style="index < itemsPerPage_ - 1 ? 'margin-right: 10px' : ''"/>
       </v-flex>
     </v-layout>
     </v-carousel-item>
@@ -28,7 +28,7 @@ export default {
     }
   },
   computed: {
-    itemsPerPage() {
+    defaultItemsPerPage() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
         case 'sm':
@@ -39,22 +39,28 @@ export default {
           return 2
       }
     },
+    itemsPerPage_() {
+      return this.itemsPerPage || this.defaultItemsPerPage
+    },
     currentArticles() {
-      const start = this.currentPage * this.itemsPerPage
-      const end = start + this.itemsPerPage
+      const start = this.currentPage * this.itemsPerPage_
+      const end = start + this.itemsPerPage_
       return this.articles.slice(start, end)
     },
     articleGroups() {
       var groups = []
-      for (var start=0; start < this.articles.length; start += this.itemsPerPage) {
-        const end = start + this.itemsPerPage
+      for (var start=0; start < this.articles.length; start += this.itemsPerPage_) {
+        const end = start + this.itemsPerPage_
         groups.push(this.articles.slice(start, end))
       }
       return groups
     }
   },
   props: {
-    articles: Array
+    articles: Array,
+    itemsPerPage: {
+      default: null
+    }
   },
   methods: {
     
