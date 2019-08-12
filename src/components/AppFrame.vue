@@ -12,15 +12,18 @@
 
       <v-toolbar-items>
         <v-btn flat icon v-if="!smallScreen"
+          disabled>
+          <v-icon>mdi-forum</v-icon>
+        </v-btn>
+
+        <v-btn flat icon v-if="!smallScreen"
           to="/my-content">
           <v-icon>mdi-wunderlist</v-icon>
-          <!-- <span>My Content</span> -->
         </v-btn>
 
         <v-btn flat icon v-if="!smallScreen"
           @click="showSearch">
           <v-icon>mdi-magnify</v-icon>
-          <!-- <span>Search</span> -->
         </v-btn>
 
         <v-btn icon ripple>
@@ -63,6 +66,20 @@
           <v-list-tile-content>
             Search
           </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile disabled>
+          <v-list-tile-action>
+            <v-icon>mdi-forum</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            Forums
+          </v-list-tile-content>
+          <v-list-tile-action>
+            <v-chip small color="error" outline>
+              <span class="caption">Coming soon</span>
+            </v-chip>
+          </v-list-tile-action>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
