@@ -82,7 +82,7 @@ export default {
         s += 'Good evening'
       }
       
-      if (this.user) {
+      if (this.user.name) {
         s += `, ${this.user.name}`
       }
 

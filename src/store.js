@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: {
-      name: 'John Doe',
+      name: '',
       id: VueCookies.get('user-id')
     },
     finished: false,
@@ -48,7 +48,32 @@ export default new Vuex.Store({
         color: '#bf360c'
       },
       {
-        name: 'Hanoi',
+        name: 'Food',
+        value: 'eat-drink',
+        color: '#f9a825'
+      },
+      {
+        name: 'Environment',
+        value: 'environment',
+        color: '#8c9900'
+      },
+      {
+        name: 'K-Pop',
+        value: 'kpop',
+        color: '#ff9e80'
+      },
+      {
+        name: 'Politics',
+        value: 'politics',
+        color: '#00675b'
+      },
+      {
+        name: 'Arts & Culture',
+        value: 'hanoi-arts-culture',
+        color: '#a094b7'
+      },
+      {
+        name: 'Urban Hanoi',
         value: 'urbanisthanoi-news',
         color: '#6d4c41'
       }
