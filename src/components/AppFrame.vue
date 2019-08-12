@@ -17,7 +17,7 @@
         </v-btn>
 
         <v-btn flat icon v-if="!smallScreen"
-          to="/my-content">
+          href="/my-content">
           <v-icon>mdi-wunderlist</v-icon>
         </v-btn>
 
@@ -50,7 +50,7 @@
     <v-navigation-drawer v-model="drawer.show"
       app v-if="smallScreen">
       <v-list>
-        <v-list-tile to="/my-content">
+        <v-list-tile href="/my-content">
           <v-list-tile-action>
             <v-icon>mdi-wunderlist</v-icon>
           </v-list-tile-action>

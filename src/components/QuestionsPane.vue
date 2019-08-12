@@ -8,7 +8,7 @@
 
     <v-card-text>
       <v-icon class="mr-1">mdi-pencil</v-icon>
-      <span class="header-text">Questions</span>
+      <span class="title">Questions</span>
     </v-card-text>
 
     <v-card-text v-for="(qst, index) in questions" :key="qst._id"
@@ -26,6 +26,13 @@
       </div>
     </v-card-text>
 
+    <v-card-text v-if="questions.length == 0"
+      class="text-xs-center">
+      <p class="subheading grey--text">
+        Questions for your content will show up here
+      </p>
+    </v-card-text>
+
     <br>
     <v-divider></v-divider>
     <v-card-text v-if="showResult">
@@ -38,7 +45,7 @@
       <v-spacer></v-spacer>
       <v-btn color="success" round
         @click="submitAnswers"
-        v-if="!finished">
+        v-if="!finished && questions.length > 0">
         Submit
       </v-btn>
       <v-spacer></v-spacer>

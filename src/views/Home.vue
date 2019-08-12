@@ -3,7 +3,7 @@
     <v-container fluid fill-height>
       <v-layout fill-height row wrap>
         <v-flex xs12 md10 offset-md1 
-          lg8 offset-lg2 xl6 offset-xl3 d-flex fill-height>
+          lg8 offset-lg2 d-flex fill-height>
           <div>
             <p class="welcome-text">
               {{ welcomeMessage }}
