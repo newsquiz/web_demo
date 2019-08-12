@@ -19,6 +19,11 @@
         :index="index + 1" :question="qst" :showResult="showResult"></choice-question-item>
       <yes-no-question-item v-else-if="qst.type == 'Yes-No-Question'"
         :index="index + 1" :question="qst" :showResult="showResult"></yes-no-question-item>
+      
+      <div class="text-xs-right">
+        <explanation-menu v-if="qst.explain && showResult"
+          :content="qst.explain"></explanation-menu>
+      </div>
     </v-card-text>
 
     <v-card-actions class="btn-bar">
@@ -46,6 +51,7 @@
 <script>
 import axios from 'axios'
 
+import ExplanationMenu from '@/components/ExplanationMenu'
 import FillQuestionItem from '@/components/FillQuestionItem'
 import ChoiceQuestionItem from '@/components/ChoiceQuestionItem'
 import YesNoQuestionItem from '@/components/YesNoQuestionItem'
@@ -54,7 +60,7 @@ import ScoreCard from '@/components/ScoreCard'
 export default {
   components: {
     FillQuestionItem, ChoiceQuestionItem, ScoreCard,
-    YesNoQuestionItem
+    YesNoQuestionItem, ExplanationMenu
   },
   data() {
     return {
@@ -106,6 +112,7 @@ export default {
           component.questions[i].explain = data.explains[i]
           component.questions[i].answer = data.answers[i] 
         }
+        console.log(data.explains)
         component.onResultReady()
       }).catch(error => {
         alert(error.message)
