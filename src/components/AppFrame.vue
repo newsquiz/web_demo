@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- Toolbar -->
-    <v-toolbar app :color="barColor" dark>
+    <v-toolbar app :color="barColor" dark
+      :dense="smallScreen">
       <v-toolbar-side-icon v-if="smallScreen"
         @click="drawer.show = !drawer.show"></v-toolbar-side-icon>
       <v-toolbar-title id="app-text">
@@ -30,7 +31,7 @@
         <v-menu offset-y left>
           <template v-slot:activator="{ on }">
             <v-btn icon ripple
-              v-on="on">
+              v-on="on" >
               <v-icon>mdi-account-circle</v-icon>
             </v-btn>
           </template>
@@ -42,6 +43,7 @@
                 {{ `You are logged in as ${user.id}` }}
               </span>
             </v-card-text>
+            <v-divider></v-divider>
             <v-list>
               <v-list-tile @click="logout">
                 <v-list-tile-title 
@@ -58,6 +60,7 @@
                 Log in to enable more features
               </span>
             </v-card-text>
+            <v-divider></v-divider>
             <v-list>
               <v-list-tile href="/login">
                 <v-list-tile-title 
@@ -161,6 +164,18 @@
         </v-expansion-panel>
       </v-card>
     </v-bottom-sheet>
+
+    <v-snackbar v-model="snackbar.show" color="accent"
+      v-if="!user.id && showNav" bottom dark :timeout="0"
+      auto-height :vertical="smallScreen">
+      <span> You are not logged in. Some features may not be available.</span>
+      <div>
+        <v-btn flat
+          @click="snackbar.show = false">
+          Close
+        </v-btn>
+      </div>
+    </v-snackbar>
   </div>
 </template>
 
@@ -204,6 +219,9 @@ export default {
       },
       drawer: {
         show: false
+      },
+      snackbar: {
+        show: true
       }
     }
   },

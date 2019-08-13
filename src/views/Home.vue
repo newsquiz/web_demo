@@ -92,6 +92,8 @@ export default {
   },
   methods: {
     loadNew() {
+      if (this.latest.loading) return
+      
       const component = this
       const offset = this.featured.articles.length + this.latest.articles.length
       const maxCount = this.itemsPerPage
