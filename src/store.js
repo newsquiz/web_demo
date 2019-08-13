@@ -13,31 +13,6 @@ export default new Vuex.Store({
     finished: false,
     topics: [
       {
-        name: 'Technology',
-        value: 'technology',
-        color: '#01579b'
-      },
-      {
-        name: 'Society',
-        value: 'society',
-        color: '#ff6f00'
-      },
-      {
-        name: 'Health',
-        value: 'health',
-        color: '#e91e63'
-      },
-      {
-        name: 'Sports',
-        value: 'sports',
-        color: '#087f23'        
-      },
-      {
-        name: 'Business',
-        value: 'business',
-        color: '#9c27b0'        
-      },
-      {
         name: 'Lifestyle',
         value: 'life',
         color: '#4f9a94'
@@ -51,6 +26,26 @@ export default new Vuex.Store({
         name: 'Food',
         value: 'eat-drink',
         color: '#f9a825'
+      },
+      {
+        name: 'Technology',
+        value: 'technology',
+        color: '#01579b'
+      },
+      {
+        name: 'Sports',
+        value: 'sports',
+        color: '#087f23'        
+      },
+      {
+        name: 'Arts & Culture',
+        value: 'hanoi-arts-culture',
+        color: '#a094b7'
+      },
+      {
+        name: 'Business',
+        value: 'business',
+        color: '#9c27b0'        
       },
       {
         name: 'Environment',
@@ -68,14 +63,19 @@ export default new Vuex.Store({
         color: '#00675b'
       },
       {
-        name: 'Arts & Culture',
-        value: 'hanoi-arts-culture',
-        color: '#a094b7'
-      },
-      {
         name: 'Urban Hanoi',
         value: 'urbanisthanoi-news',
         color: '#6d4c41'
+      },
+      {
+        name: 'Society',
+        value: 'society',
+        color: '#ff6f00'
+      },
+      {
+        name: 'Health',
+        value: 'health',
+        color: '#e91e63'
       }
     ]
   },
