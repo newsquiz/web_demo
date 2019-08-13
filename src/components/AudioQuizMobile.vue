@@ -23,7 +23,8 @@
 
           <v-tab-item>
             <questions-pane :questions="article.questions"
-              :article_id="article.id" height="80vh"></questions-pane>
+              :article_id="article.id" height="80vh"
+              hide-title></questions-pane>
           </v-tab-item>
         </v-tabs>
       </v-flex>

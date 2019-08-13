@@ -13,17 +13,19 @@
               v-model="url" box type="url"
               placeholder="Enter an article url..."
               @keyup.enter="parseUrl"
+              clearable
               append-outer-icon="mdi-progress-download"
               @click:append-outer="parseUrl"
               :readonly="parsing"
               :loading="parsing"></v-text-field>
 
-            <p v-if="title" class="headline">
-              {{ title }}
-            </p>
+            <v-textarea label="Title"
+              clearable box class="font-weight-medium"
+              :rows="1" auto-grow v-model="title">
+            </v-textarea>
 
             <editor-content :editor="editor"
-              :editable="!parsing && !generating && !article_id"
+              :editable="!parsing && !generating && !article.id"
               class="editor-pane"></editor-content>
           </v-card-text>
 
@@ -35,15 +37,20 @@
       </v-flex>
       <v-flex md6 fill-height>
         <questions-pane :height="height"
-          :article_id="article_id" :questions="questions"></questions-pane>
+          :article_id="article.id" :questions="article.questions"></questions-pane>
       </v-flex>
       <v-flex md12 class="text-xs-center"
         style="margin-top: -15px">
         <v-btn round color="success" large
           @click="fetchQuestions"
-          :disabled="parsing || article_id"
-          :loading="generating">
+          :disabled="parsing || article.id"
+          :loading="generating"
+          v-if="!article.id">
           Upload
+        </v-btn>
+        <v-btn v-else round large
+          color="error" @click="discard">
+          Discard
         </v-btn>
       </v-flex>
     </v-layout>
@@ -65,10 +72,9 @@ export default {
   },
   data() {
     return {
-      url: 'https://www.theguardian.com/world/2019/aug/12/hong-kong-airport-authority-cancels-flights-over-protests',
+      url: 'https://www.theguardian.com/commentisfree/2019/aug/12/rock-sea-meaing-tel-aviv-beach-refugee',
       title: '',
-      article_id: null,
-      questions: [],
+      article: {},
       parsing: false,
       generating: false,
       editor: null
@@ -103,7 +109,7 @@ export default {
         const article = reader.parse()
 
         component.title = article.title
-        component.editor.setContent(article.content)
+        component.editor.setContent(article.content, true)
       }).catch(error => {
         alert(error.message)
         console.log(error)
@@ -112,7 +118,34 @@ export default {
       })
     },
     fetchQuestions() {
+      const content = this.editor.getHTML()
+      if (!content) return
+
       const component = this
+      const url = `${process.env.VUE_APP_API_URL}/api/generate_questions`
+      const payload = {
+        content: content
+      }
+
+      this.generating = true
+      var headers = {}
+      if (this.$store.state.user.id) {
+        headers['User-Id'] = this.$store.state.user.id
+      }
+      return axios.post(url, payload, {
+        headers: headers
+      }).then(response => {
+        const article = response.data.data
+        component.article = article
+      }).catch(error => {
+        alert(error.message)
+        console.log(error)
+      }).then(() => {
+        component.generating = false
+      })
+    },
+    discard() {
+
     }
   }
 }
@@ -120,8 +153,11 @@ export default {
 
 <style scoped>
 .editor-pane {
-  border: 1px solid black;
-  min-height: 250px;
+  background-color: #eeeeee;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px solid black;
+  min-height: 30px;
   font-size: medium;
   padding: 5px;
 }

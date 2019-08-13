@@ -5,8 +5,9 @@
         <v-flex xs12>
           <div>
             <p class="headline">Upload content</p>
-            <p>Paste your own custom document or a news article url to generate a quiz</p>
+            <p>Paste your own custom document or a news article URL to generate a quiz</p>
           </div>
+          <v-divider></v-divider>
         </v-flex>
         <v-flex xs12>
           <upload-pane height="60vh"></upload-pane>

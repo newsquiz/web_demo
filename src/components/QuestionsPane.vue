@@ -6,27 +6,29 @@
       :totalQuestions="totalQuestions"
       :correctQuestions="totalCorrectQuestions"></score-card>
 
-    <v-card-text>
+    <v-card-text v-if="!hideTitle">
       <v-icon class="mr-1">mdi-pencil</v-icon>
       <span class="title">Questions</span>
     </v-card-text>
 
-    <v-card-text v-for="(qst, index) in questions" :key="qst._id"
-      class="demargin">
-      <fill-question-item v-if="qst.type == 'Short-Answer-Question' || qst.type == 'Fullfill'"
-        :index="index + 1" :question="qst" :showResult="showResult"></fill-question-item>
-      <choice-question-item v-else-if="qst.type == 'Multi-Choice-Question' || qst.type =='Fullfill-MultiChoice'"
-        :index="index + 1" :question="qst" :showResult="showResult"></choice-question-item>
-      <yes-no-question-item v-else-if="qst.type == 'Yes-No-Question'"
-        :index="index + 1" :question="qst" :showResult="showResult"></yes-no-question-item>
-      
-      <div class="text-xs-right">
-        <explanation-menu v-if="qst.explain && showResult"
-          :content="qst.explain"></explanation-menu>
-      </div>
-    </v-card-text>
-
-    <v-card-text v-if="questions.length == 0"
+    <div v-if="questions">
+      <v-card-text v-for="(qst, index) in questions" :key="qst._id"
+        class="demargin">
+        <fill-question-item v-if="qst.type == 'Short-Answer-Question' || qst.type == 'Fullfill'"
+          :index="index + 1" :question="qst" :showResult="showResult"></fill-question-item>
+        <choice-question-item v-else-if="qst.type == 'Multi-Choice-Question' || qst.type =='Fullfill-MultiChoice'"
+          :index="index + 1" :question="qst" :showResult="showResult"></choice-question-item>
+        <yes-no-question-item v-else-if="qst.type == 'Yes-No-Question'"
+          :index="index + 1" :question="qst" :showResult="showResult"></yes-no-question-item>
+        
+        <div class="text-xs-right">
+          <explanation-menu v-if="qst.explain && showResult"
+            :content="qst.explain"></explanation-menu>
+        </div>
+      </v-card-text>
+    </div>
+    
+    <v-card-text v-if="!questions || questions.length == 0"
       class="text-xs-center">
       <p class="subheading grey--text">
         Questions for your content will show up here
@@ -45,7 +47,7 @@
       <v-spacer></v-spacer>
       <v-btn color="success" round
         @click="submitAnswers"
-        v-if="!finished && questions.length > 0">
+        v-if="!finished && questions && questions.length > 0">
         Submit
       </v-btn>
       <v-spacer></v-spacer>
@@ -93,6 +95,12 @@ export default {
     article_id: String,
     height: {
       default: '100%'
+    },
+    hideTitle: {
+      default: false
+    },
+    isUserContent: {
+      default: false
     }
   },
   methods: {
@@ -103,7 +111,8 @@ export default {
       const answers = this.questions.map(x => x.userAnswer || '')
       const payload = {
         questions: qids,
-        answers: answers
+        answers: answers,
+        is_user_content: this.isUserContent
       }
 
       var headers = {}
