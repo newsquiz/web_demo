@@ -17,7 +17,8 @@
         </v-btn>
 
         <v-btn flat icon v-if="!smallScreen"
-          href="/my-content">
+          href="/my-content"
+          :disabled="!user.id">
           <v-icon>mdi-wunderlist</v-icon>
         </v-btn>
 
@@ -26,12 +27,54 @@
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
 
-        <v-btn icon ripple>
-          <v-avatar size="40">
-            <!-- <img :src="user.imageUrl" alt=""> -->
-            <v-icon >mdi-account-circle</v-icon>
-          </v-avatar>
-        </v-btn>
+        <v-menu offset-y left>
+          <template v-slot:activator="{ on }">
+            <v-btn icon ripple
+              v-on="on">
+              <v-icon>mdi-account-circle</v-icon>
+            </v-btn>
+          </template>
+
+          <v-card v-if="user.id"
+            flat>
+            <v-card-text>
+              <span class="grey--text">
+                {{ `You are logged in as ${user.id}` }}
+              </span>
+            </v-card-text>
+            <v-list>
+              <v-list-tile @click="logout">
+                <v-list-tile-title 
+                  class="error--text font-weight-medium">
+                  Logout
+                </v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-card>
+          
+          <v-card v-else width="150px">
+            <v-card-text>
+              <span class="grey--text">
+                Log in to enable more features
+              </span>
+            </v-card-text>
+            <v-list>
+              <v-list-tile href="/login">
+                <v-list-tile-title 
+                  class="font-weight-medium">
+                  Login
+                </v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile href="/signup">
+                <v-list-tile-title 
+                  class="font-weight-medium">
+                  Sign up
+                </v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-card>
+          
+        </v-menu>
       </v-toolbar-items>
 
       <template v-slot:extension v-if="showNav">
@@ -205,6 +248,11 @@ export default {
       var targetUrl = `/search?query=${this.search.query}`
       this.search.show = false
       this.$router.push(targetUrl)
+    },
+    logout() {
+      this.$store.commit('setUserId', null)
+      this.$cookies.remove('user-id')
+      this.$router.push('/')
     }
   }
 }

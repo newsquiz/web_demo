@@ -23,6 +23,11 @@ export default {
   },
   mounted() {
     document.title = `Search results for "${this.$route.query.query}"`
+  },
+  methods: {
+    search() {
+      const query = this.$route.query.query
+    }
   }
 }
 </script>

@@ -37,7 +37,8 @@
       </v-flex>
       <v-flex md6 fill-height>
         <questions-pane :height="height"
-          :article_id="article.id" :questions="article.questions"></questions-pane>
+          :article_id="article.id" :questions="article.questions"
+          :isUserContent="true"></questions-pane>
       </v-flex>
       <v-flex md12 class="text-xs-center"
         style="margin-top: -15px">
@@ -145,7 +146,7 @@ export default {
       })
     },
     discard() {
-
+      this.article = {}
     }
   }
 }
