@@ -2,7 +2,8 @@
   <div>
     <!-- Toolbar -->
     <v-toolbar app :color="barColor" dark
-      :dense="smallScreen">
+      :dense="smallScreen"
+      scroll-off-screen>
       <v-toolbar-side-icon v-if="smallScreen"
         @click="drawer.show = !drawer.show"></v-toolbar-side-icon>
       <v-toolbar-title id="app-text">

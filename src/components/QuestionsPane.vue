@@ -38,7 +38,7 @@
     <br>
     <v-divider></v-divider>
     <v-card-text v-if="showResult">
-      <p class="headline">Recommended articles</p>
+      <p class="headline">Continue reading</p>
       <article-horiz-list :itemsPerPage="1"
         :articles="nextArticles"></article-horiz-list>
     </v-card-text>

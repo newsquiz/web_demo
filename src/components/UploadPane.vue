@@ -13,7 +13,7 @@
               v-model="url" box type="url"
               placeholder="Enter an article url..."
               @keyup.enter="parseUrl"
-              clearable
+              clearable autofocus
               append-outer-icon="mdi-progress-download"
               @click:append-outer="parseUrl"
               :readonly="parsing"
