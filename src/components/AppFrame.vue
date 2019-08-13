@@ -96,7 +96,8 @@
     <v-navigation-drawer v-model="drawer.show"
       app v-if="smallScreen">
       <v-list>
-        <v-list-tile href="/my-content">
+        <v-list-tile href="/my-content"
+          disabled>
           <v-list-tile-action>
             <v-icon>mdi-wunderlist</v-icon>
           </v-list-tile-action>
@@ -265,7 +266,8 @@ export default {
     startSearch() {
       var targetUrl = `/search?query=${this.search.query}`
       this.search.show = false
-      this.$router.push(targetUrl)
+      window.location.href = targetUrl
+      // this.$router.push(targetUrl)
     },
     logout() {
       this.$store.commit('setUserId', null)
