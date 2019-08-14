@@ -5,6 +5,13 @@
       height="300px"
       :src="thumbnailUrl">
         <v-layout align-end justify-end row fill-height wrap>
+          <v-flex xs12 v-if="article.type === 'audio'">
+            <div class="text-xs-center">
+              <v-btn fab icon depressed outline color="white" large>
+                <v-icon size="64">mdi-play</v-icon>
+              </v-btn>
+            </div>
+          </v-flex>
           <v-flex xs12
             class="overlay-text card-item"
             :style="`border-color: ${this.topic.color} !important;`">
