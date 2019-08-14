@@ -105,7 +105,7 @@ export default {
       }
     },
     displayDate: function() {
-      let current_datetime = new Date(Date.parse(this.article.created_time));
+      let current_datetime = new Date(Date.parse(this.article.publish_time || this.article.created_time));
       let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
       return formatted_date
     },
